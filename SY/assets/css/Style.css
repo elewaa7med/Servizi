@@ -1,0 +1,1184 @@
+﻿/************************************ Start general Style ********************************************/
+
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.card .nav-link {
+    text-transform: capitalize !important;
+    letter-spacing: 0.7px !important;
+    word-spacing: 1.5px;
+    font-size: 12px !important;
+}
+
+.preColor {
+    background-color: #75887d;
+}
+
+.preColor:hover {
+    background-color: #75887d !important;
+}
+
+.deactiveColor {
+    background-color: #714848;
+}
+
+.deactiveColor:hover {
+    background-color: #714848 !important;
+}
+
+#sendNotificationModal .btn.btn-secondary, #sendNotificationModal .btn:hover {
+    color: #ffffff;
+    background-color: #999999;
+    border-color: #999;
+}
+
+#sendNotificationModal .btn, #sendNotificationModal .btn:focus, .btn.btn-default {
+    color: #fff;
+    background-color: #718699;
+    border-color: #718699;
+}
+
+#sendNotificationModal .btn.btn-default:focus, #sendNotificationModal .btn.btn-default.focus, #sendNotificationModal .btn.btn-default:hover {
+    color: #fff;
+    background-color: #718699;
+    border-color: #718699;
+}
+.dropdown-menu  >a:hover{
+    cursor: pointer;
+}
+div#divtb {
+    max-width: 100%;
+    margin: 0 auto;
+    font-family: Calibri;
+    padding: 0.5em 1em 1em 1em;
+    /* rounded corners */
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    /* add gradient */
+    background-color: #ff6a00;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f2bc5b), to(#ee9417));
+    background: -moz-linear-gradient(top, #606060, #808080);
+    /* add box shadows */
+    -moz-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+}
+
+div#divContainer {
+    margin: 0 auto;
+    font-family: Calibri;
+    padding: 0.5em 1em 1em 1em;
+    /* rounded corners */
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    /* add gradient */
+    background-color: #ff6a00;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f2bc5b), to(#ee9417));
+    background: -moz-linear-gradient(top, #606060, #808080);
+    /* add box shadows */
+    -moz-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+}
+
+.nn {
+    margin: 0 auto;
+    font-family: Calibri;
+    padding: 0.5em 1em 1em 1em;
+    /* rounded corners */
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    /* add box shadows */
+    -moz-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+}
+
+.dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus, .dropdown-menu a:hover, .dropdown-menu a:focus, .dropdown-menu a:active {
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgb(75, 104, 128);
+    background-color: #4b6880;
+    color: #FFFFFF !important;
+}
+
+#errorEmail, #errorName, #errorphoneNumber, 
+#error-reason, #errorPassword, #errorUserName, 
+#errorPasswordConfirm, #errorPrivalages, #errorAddress, 
+#errorDate, .settingError, #errortitle, #errorBody, 
+#errorfreeBody, #errorfreetitle, #errorCatNameEnglish, 
+#errorCatImg, #errorCatNameArabic,#errorLocationNameEnglish,
+#errorLocationNameArabic,#errorLocationSelectMainCountry{
+    color: #f00;
+    font-size: 0.8em;
+    display: none;
+    margin: 0px;
+    padding: 0px;
+    font-weight: normal;
+    text-align: left;
+}
+
+#cat-label {
+    margin-bottom: 0px;
+    margin-top: 13px;
+}
+
+#errorLogin {
+    text-align: center;
+    display: none;
+}
+
+.button-more {
+    background: none;
+    color: #0717ff;
+    text-decoration: underline;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
+
+.form-control, .is-focused .form-control {
+    background-image: linear-gradient(to top, #384d5f 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
+}
+
+.is-focused [class^='bmd-label'], .is-focused [class*=' bmd-label'] {
+    color: #384d5f;
+}
+
+.button-more:hover {
+    cursor: pointer;
+}
+
+.form-control[readonly] {
+    background-color: transparent;
+}
+
+.pagination {
+    display: inline-block;
+    list-style: none;
+    padding-left: 0px;
+    width: 100%;
+    text-align: center;
+}
+
+.pagination li {
+    display: inline-block;
+    padding: 10px;
+    border: 1.2px solid #7a828a;
+    margin-left: 10px;
+    margin-bottom: 8px;
+}
+
+.pagination li:hover {
+    background-color: #8693a0;
+    border-color: #8693a0;
+    color: #fff;
+    cursor: pointer;
+}
+
+.pagination li.active {
+    background-color: #8693a0;
+    border-color: #8693a0;
+    color: #fff;
+}
+
+/************************************ End general Style ********************************************/
+
+/********************************* Start Employee Style Page ***********************/
+
+#profile select.form-control:not([size]):not([multiple]) {
+    height: 36px;
+}
+
+#profile .form-group {
+    padding: 10px 17px;
+    margin: 10px 0px 5px !important;
+}
+
+#profile .is-focused .bmd-label-floating, #profile .is-filled .bmd-label-floating {
+    top: -0.45rem;
+    left: 17px;
+    font-size: 0.7575rem;
+}
+
+#profile #divtb .btn.btn-warning {
+    background-color: #8693a0;
+    border-color: #8693a0;
+    box-shadow: 0 2px 2px 0 rgb(153, 181, 207), 0 3px 1px -2px rgb(75, 104, 128), 0 1px 5px 0 rgb(153, 181, 207);
+    width: 108px;
+    font-size: 14px;
+    margin-right: 22px;
+}
+
+#profile #divtb .btn-primary {
+    background-color: #793939;
+}
+
+#profile #divtb table thead tr th:first-child {
+    width: 30%;
+}
+
+#profile #divtb table thead tr th:nth-child(2) {
+    width: 30%;
+}
+
+#profile #divtb table thead tr th:nth-child(3), #profile #divtb table tbody tr td:nth-child(3) {
+    width: 25%;
+    text-align: center;
+}
+
+#profile #divtb table thead tr th:nth-child(4) {
+    width: 15%;
+}
+
+#profile #divtb table tbody tr {
+    height: 76.15px;
+}
+
+/********************************* End Employee Style Page ***********************/
+
+/********************************* Start  Customer Style Page ***********************/
+
+thead tr {
+    height: 55px;
+}
+
+thead tr th {
+    font-size: 20px;
+    background: #8693a0;
+    border-right: 1.2px;
+    border-right-style: outset;
+    text-align: center;
+}
+
+thead tr th:first-child {
+    border-top-left-radius: 8px;
+}
+
+thead tr th:last-child {
+    border-top-right-radius: 8px;
+    border-right: none;
+}
+
+#customer #custb tr td:first-child, 
+#customer #custb tr th:first-child, 
+#freelancer #frtb tr td:first-child, 
+#freelancer #frtb tr th:first-child, 
+#company #comtb tr td:first-child, 
+#company #comtb tr th:first-child {
+    width: 15%;
+    max-width: 15%;
+    min-width: 15%;
+}
+
+#customer #custb tr td:nth-child(2), 
+#customer #custb tr th:nth-child(2) {
+    width: 15%;
+    max-width: 15%;
+    min-width: 15%;
+}
+
+#customer #custb tr td:nth-child(3), 
+#customer #custb tr th:nth-child(3), 
+#freelancer #frtb tr td:nth-child(3), 
+#freelancer #frtb tr th:nth-child(3), 
+#company #comtb tr td:nth-child(3), 
+#company #comtb tr th:nth-child(3) {
+    width: 8%;
+    max-width: 8%;
+    min-width: 8%;
+    text-align: center;
+}
+
+#customer #custb tr td:nth-child(4), 
+#customer #custb tr th:nth-child(4), 
+#freelancer #frtb tr td:nth-child(4), 
+#freelancer #frtb tr th:nth-child(4), 
+#company #comtb tr td:nth-child(4), 
+#company #comtb tr th:nth-child(4)  {
+    width: 8%;
+    max-width: 8%;
+    min-width: 8%;
+    text-align: center;
+}
+
+#customer #custb tr td:nth-child(5), 
+#customer #custb tr th:nth-child(5) {
+    width: 7%;
+    max-width: 7%;
+    min-width: 7%;
+    text-align: center;
+}
+
+#customer #custb tr td:last-child, 
+#customer #custb tr th:last-child, 
+#freelancer #frtb tr td:last-child, 
+#freelancer #frtb tr th:last-child, 
+#company #comtb tr td:last-child, 
+#company #comtb tr th:last-child {
+    text-align: center;
+}
+
+#customer #custb tr button, 
+#freelancer #frtb tr button,
+#company #comtb tr button {
+    margin-right: 8px;
+    padding: 0px;
+    height: 40px;
+}
+
+#customer #custb tr .dropdown-menu>a:hover, 
+#freelancer #frtb tr .dropdown-menu>a:hover,
+#company #comtb tr .dropdown-menu>a:hover {
+    cursor: pointer;
+}
+
+#customer #custb tr button:nth-child(1), 
+#freelancer #frtb tr button:nth-child(1) ,
+#company #comtb tr button:nth-child(1) {
+    width: 75px;
+}
+
+#customer #custb tr button:nth-child(2), 
+#freelancer #frtb tr button:nth-child(2),
+#company #comtb tr button:nth-child(2) {
+    width: 75px;
+}
+
+#customer #custb tr button:nth-child(3), 
+#freelancer #frtb tr button:nth-child(3),
+#company #comtb tr button:nth-child(3) {
+    width: 80px;
+}
+
+#customer #custb tr button:nth-child(4), 
+#freelancer #frtb tr button:nth-child(4),
+#company #comtb tr button:nth-child(4) {
+    width: 120px;
+}
+#customer #custb tr button:nth-child(7), 
+#freelancer #frtb tr button:nth-child(7) ,
+#company #comtb tr button:nth-child(7) {
+    width: 75px;
+}
+
+
+#customer #custb tr button:nth-child(5), 
+#freelancer #frtb tr button:nth-child(5),
+#company #comtb tr button:nth-child(5) {
+    width: 80px;
+    display: none;
+}
+
+#customer #cus-list #CusEmptyTable td, 
+#freelancer #fr-list #FreeEmptyTable td, 
+#company #com-list #ComEmptyTable td, 
+#profile #user-list #EmpEmptyTable td, 
+#Category #cat-list #catEmptyTable td,
+#country #country-list  #countryEmptyTable td {
+    text-align: center;
+    font-size: 18px;
+    padding: 30px 0px
+}
+
+.btn.btn-warning:active:hover, 
+.btn.btn-warning:active:focus, 
+.btn.btn-warning:active.focus, 
+.btn.btn-warning.active:hover, 
+.btn.btn-warning.active:focus, 
+.btn.btn-warning.active.focus, 
+.open>.btn.btn-warning.dropdown-toggle:hover, 
+.open>.btn.btn-warning.dropdown-toggle:focus, 
+.open>.btn.btn-warning.dropdown-toggle.focus, 
+.show>.btn.btn-warning.dropdown-toggle:hover, 
+.show>.btn.btn-warning.dropdown-toggle:focus, 
+.show>.btn.btn-warning.dropdown-toggle.focus {
+    color: #fff;
+    background-color: #4b6880;
+    border-color: #99b5cf;
+}
+
+/********************************* End Customer Style Page ***********************/
+
+/********************************* start freelancer Style Page ***********************/
+
+.spiner-center {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: inline-block;
+    top: 45%;
+    left: 45%;
+}
+
+.spinner-border-edit {
+    display: none;
+}
+
+#freelancer #frtb tr td:nth-child(2),
+#freelancer #frtb tr th:nth-child(2),
+#company #comtb tr th:nth-child(2) {
+    width: 18%;
+    max-width: 18%;
+    min-width: 18%;
+}
+
+#editFreelancer button[onclick="imageBrowserFreelancer()"] {
+    width: 100%;
+    padding: 0px;
+    text-align: center;
+    height: 39px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+}
+
+#addUpdateCategory button[onclick="imageBrowserCategory()"] {
+    width: 30%;
+    padding: 0px;
+    text-align: center;
+    height: 39px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+}
+
+#editFreelancer .img-spiner-container {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 320px;
+}
+
+#addUpdateCategory .img-spiner-container {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 200px;
+}
+
+#addUpdateCategory .img-spiner-container img {
+    border-radius: 50%;
+}
+
+#editFreelancer .input-form input, #editFreelancer .input-form select {
+    margin-top: -15px;
+    margin-bottom: 28px;
+}
+
+#freelancer .filteration .Dfiltration, 
+#freelancer .filteration .DCountry, 
+#freelancer .filteration .DCity, 
+#freelancer .filteration .DCategory {
+    display: none;
+    margin: 15px 0px;
+    padding-left: 30px;
+}
+
+#freelancer #countFreelancer {
+    padding: 10px;
+    margin: 0px 16px;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: #efefef;
+    display: inline-block;
+    border-radius: 8px;
+    color: #5f5959;
+}
+
+#freelancer .filteration .DCategory {
+    padding-right: 30px;
+}
+
+#freelancer .filteration .Dfiltration {
+    display: inline-block;
+}
+
+/********************************* end freelancer Style Page ***********************/
+
+/******************************** Start Category Style Page **********************/
+
+#Category #cattb thead tr th:nth-child(1), #Category #cattb tbody tr td:nth-child(1) {
+    width: 25%;
+    text-align: center;
+}
+
+#Category #cattb tbody tr {
+    height: 182px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#Category #cattb #spinnerLoaderCat, 
+#Category #cattb #catEmptyTable {
+    height: 10px;
+}
+
+#Category #cattb tbody tr td:nth-child(1) img {
+    border-radius: 50%;
+    width: 160px;
+    height: 149px;
+}
+
+#Category #cattb thead tr th:nth-child(2), 
+#Category #cattb tbody tr td:nth-child(2) {
+    width: 20%;
+    text-align: center;
+}
+
+#Category #cattb thead tr th:nth-child(3), 
+#Category #cattb tbody tr td:nth-child(3) {
+    width: 20%;
+    text-align: center;
+}
+
+#Category #cattb thead tr th:nth-child(4), 
+#Category #cattb tbody tr td:nth-child(4) {
+    text-align: center;
+}
+
+#Category #cattb tbody tr td:nth-child(4) button {
+    margin-left: 8px;
+}
+
+#Category #cattb tbody tr td:nth-child(4) button:nth-child(3) {
+    display: none;
+}
+
+/******************************** End Category Page Style **********************/
+
+/******************************** Start Request page Style ***********************/
+
+tbody {
+    font-size: 16px;
+}
+
+#pending table thead tr th:nth-child(1), 
+#pending table tbody tr td:nth-child(1), 
+#post table thead tr th:nth-child(1), 
+#post table tbody tr td:nth-child(1), 
+#Cancel table thead tr th:nth-child(1), 
+#Cancel table tbody tr td:nth-child(1) {
+    width: 30%;
+}
+
+#working table thead tr th:nth-child(1), 
+#working table tbody tr td:nth-child(1), 
+#FFinish table thead tr th:nth-child(1), 
+#FFinish table tbody tr td:nth-child(1), 
+#CMFinish table thead tr th:nth-child(1),  
+#CMFinish table tbody tr td:nth-child(1) {
+    width: 28%;
+}
+
+#pending table thead tr th:nth-child(2), 
+#pending table tbody tr td:nth-child(2), 
+#post table thead tr th:nth-child(2), 
+#post table tbody tr td:nth-child(2), 
+#Cancel table thead tr th:nth-child(2), 
+#Cancel table tbody tr td:nth-child(2) {
+    width: 18%;
+    text-align: center;
+}
+
+#working table thead tr th:nth-child(2), 
+#working table tbody tr td:nth-child(2), 
+#FFinish table thead tr th:nth-child(2), 
+#FFinish table tbody tr td:nth-child(2), 
+#CMFinish table thead tr th:nth-child(2), 
+#CMFinish table tbody tr td:nth-child(2) {
+    width: 15%;
+    text-align: center;
+}
+
+#pending table thead tr th:nth-child(3), 
+#pending table tbody tr td:nth-child(3), 
+#post table thead tr th:nth-child(3), 
+#post table tbody tr td:nth-child(3), 
+#Cancel table thead tr th:nth-child(3), 
+#Cancel table tbody tr td:nth-child(3) {
+    width: 10%;
+    text-align: center;
+}
+
+#working table thead tr th:nth-child(3), 
+#working table tbody tr td:nth-child(3), 
+#FFinish table thead tr th:nth-child(3), 
+#FFinish table tbody tr td:nth-child(3), 
+#CMFinish table thead tr th:nth-child(3), 
+#CMFinish table tbody tr td:nth-child(3) {
+    width: 8%;
+    text-align: center;
+}
+
+#pending table thead tr th:nth-child(4), 
+#pending table tbody tr td:nth-child(4), 
+#post table thead tr th:nth-child(4), 
+#post table tbody tr td:nth-child(4), 
+#Cancel table thead tr th:nth-child(4), 
+#Cancel table tbody tr td:nth-child(4) {
+    width: 8%;
+    text-align: center;
+}
+
+#working table thead tr th:nth-child(4), 
+#working table tbody tr td:nth-child(4), 
+#FFinish table thead tr th:nth-child(4), 
+#FFinish table tbody tr td:nth-child(4), 
+#CMFinish table thead tr th:nth-child(4), 
+#CMFinish table tbody tr td:nth-child(4) {
+    width: 7%;
+    text-align: center;
+}
+
+#pending table thead tr th:nth-child(5), 
+#pending table tbody tr td:nth-child(5), 
+#post table thead tr th:nth-child(5), 
+#post table tbody tr td:nth-child(5), 
+#Cancel table thead tr th:nth-child(5), 
+#Cancel table tbody tr td:nth-child(5) {
+    width: 16%;
+    text-align: center;
+}
+
+#working table thead tr th:nth-child(5), 
+#working table tbody tr td:nth-child(5), 
+#FFinish table thead tr th:nth-child(5), 
+#FFinish table tbody tr td:nth-child(5), 
+#CMFinish table thead tr th:nth-child(5), 
+#CMFinish table tbody tr td:nth-child(5) {
+    width: 15%;
+    text-align: center;
+}
+
+#pending table thead tr th:nth-child(6), 
+#pending table tbody tr td:nth-child(6), 
+#post table thead tr th:nth-child(6), 
+#post table tbody tr td:nth-child(6), 
+#Cancel table thead tr th:nth-child(6), 
+#Cancel table tbody tr td:nth-child(6) {
+    width: 11%;
+    text-align: center;
+}
+
+#working table thead tr th:nth-child(6), 
+#working table tbody tr td:nth-child(6), 
+#FFinish table thead tr th:nth-child(6), 
+#FFinish table tbody tr td:nth-child(6), 
+#CMFinish table thead tr th:nth-child(6), 
+#CMFinish table tbody tr td:nth-child(6) {
+    width: 10%;
+    text-align: center;
+}
+
+#pending table thead tr th:nth-child(7), 
+#pending table tbody tr td:nth-child(7), 
+#post table thead tr th:nth-child(7), 
+#post table tbody tr td:nth-child(7), 
+#Cancel table thead tr th:nth-child(7), 
+#Cancel table tbody tr td:nth-child(7) {
+    width: 7%;
+    text-align: center;
+}
+
+#pending table tbody tr td:nth-child(7) button, 
+#post table tbody tr td:nth-child(7) button, 
+#Cancel table tbody tr td:nth-child(7) button, 
+#working table tbody tr td:nth-child(8) button, 
+#FFinish table tbody tr td:nth-child(8) button, 
+#CMFinish table tbody tr td:nth-child(8) button {
+    padding: 0px;
+    width: 90px;
+    height: 42px;
+}
+
+#working table thead tr th:nth-child(7), 
+#working table tbody tr td:nth-child(7), 
+#FFinish table thead tr th:nth-child(7), 
+#FFinish table tbody tr td:nth-child(7), 
+#CMFinish table thead tr th:nth-child(7), 
+#CMFinish table tbody tr td:nth-child(7) {
+    width: 11%;
+    text-align: center;
+}
+
+#working table thead tr th:nth-child(8), 
+#working table tbody tr td:nth-child(8), 
+#FFinish table thead tr th:nth-child(8), 
+#FFinish table tbody tr td:nth-child(8), 
+#CMFinish table thead tr th:nth-child(8), 
+#CMFinish table tbody tr td:nth-child(8) {
+    width: 7%;
+    text-align: center;
+}
+#spinnerLoaderEmp,
+#spinnerLoaderCust,
+#spinnerLoaderFree,
+#spinnerLoaderCom,
+#spinnerLoaderCat ,
+#spinnerLoaderPend, 
+#spinnerLoaderPost, 
+#spinnerLoaderfw, 
+#spinnerLoadercw, 
+#spinnerLoadercf, 
+#spinnerLoaderc, 
+#spinnerLoadercountry, 
+#pendEmptyTable, 
+#postEmptyTable, 
+#cEmptyTable, 
+#cfEmptyTable, 
+#ffEmptyTable, 
+#fwEmptyTable,
+#countryEmptyTable {
+    text-align: center;
+}
+
+/******************************** End  Request page Style ***********************/
+
+/******************************** Start Country & City page Style ***********************/
+#country #countrytb tbody tr,
+    #city #citytb tbody tr{
+    text-align: center;
+}
+#country #countrytb tbody tr td:nth-child(3) button:nth-child(1) ,
+    #city #citytb tbody tr td:nth-child(3) button:nth-child(1) {
+    display: none;
+}
+#country #countrytb tbody tr td:nth-child(3) button,
+#city #citytb tbody tr td:nth-child(3) button{
+    padding: 0px;
+    width: 80px;
+    height: 40px;
+}
+
+#country #countrytb tbody tr td:nth-child(3) button:nth-child(3),
+#city #citytb tbody tr td:nth-child(3) button:nth-child(3) {
+    margin-right: 15px;
+}
+/******************************** End  Country & City page Style ***********************/
+#notifList {
+    max-height: 400px;
+    overflow: auto;
+}
+
+#okour, #cusdiv, #freediv, #CMdiv {
+    padding: 10px 30px 10px 20px;
+}
+
+#okour h3, 
+#cusdiv h3, 
+.tab-pane h3, 
+#freediv h3, 
+#CMdiv h3, 
+.category h3 {
+    border: 2px solid #c4c4c4;
+    width: max-content;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #4b6880;
+    color: #fff;
+    font-weight: 400;
+}
+
+.category h3 {
+    margin-top: 39px;
+    margin-bottom: -18px;
+}
+
+#okour span, #cusdiv span, #freediv span, #CMdiv span {
+    padding-right: 10px;
+    color: #ff9800;
+    font-weight: 600;
+}
+
+.tab-pane>table, #settings .row>table, #cm .row>table, .category>table {
+    border: none;
+    margin-top: 34px;
+    margin-left: 31px;
+}
+
+.tab-pane>table tr, #settings .row>table tr, .category>table tr, #cm .row table tr {
+    height: 50px;
+    text-align: center;
+}
+
+.tab-pane>table tr td:first-child, #settings .row>table tr td:first-child, .category>table tr td:first-child, #cm .row table tr td:first-child {
+    padding: 0px 19px;
+    color: #ff981f;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.tab-pane>table tr td input, #settings .row>table tr td input, .category>table tr td input, #cm .row table tr td input {
+    border: none;
+    border-bottom: 1px solid #9d9d9d;
+    width: 284px;
+}
+
+.card .card-header-warning .card-icon, .card .card-header-warning .card-text, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card.bg-warning, .card.card-rotate.bg-warning .front, .card.card-rotate.bg-warning .back, .card .card-header-warning .card-icon, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card .card-header-warning .card-text {
+    background: #99b5cf;
+}
+
+div#divtb, .nn, div#divContainer {
+    background: #99b5cf;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+div#divtb table, .nn table, div#divContainer table {
+    background: #4b6880;
+    color: #fff;
+    border-radius: 10px;
+    margin: 20px 0px;
+}
+
+div#divtb label, .nn label, div#divContainer label {
+    color: #fff;
+    margin: 10px 20px 0px 10px;
+    font-size: 18px;
+}
+
+div#divtb input, .nn input, div#divContainer input {
+    border: none;
+    width: 200px;
+    padding: 3px;
+    background: none;
+    border-bottom: 2px solid #fff;
+    color: #fff;
+}
+
+.table.table-hover tbody tr:hover {
+    background-color: unset;
+    color: #fff;
+}
+
+.table.table-hover tbody .deactiveColor:hover {
+    background-color: #714848;
+}
+
+.sidebar[data-color="orange"] li.active>a {
+    background-color: #4b6880;
+}
+
+.btn.btn-warning, .btn.btn-warning:focus {
+    background-color: #8693a0;
+    border-color: #8693a0;
+    box-shadow: 0 2px 2px 0 rgb(153, 181, 207), 0 3px 1px -2px rgb(75, 104, 128), 0 1px 5px 0 rgb(153, 181, 207);
+}
+
+.btn.btn-warning:hover {
+    background-color: #99b5cf;
+    border-color: #99b5cf;
+    box-shadow: 0 2px 2px 0 rgb(153, 181, 207), 0 3px 1px -2px rgb(75, 104, 128), 0 1px 5px 0 rgb(153, 181, 207);
+}
+
+#updateCountry, #cityUpdate {
+    display: none;
+}
+
+/****************************************************** start notification pages ********************************************************/
+.DCountry, .DCity, .DCategory, .DCategory, .notifications, .DSpsific {
+    display: none;
+    margin: 15px 0px;
+}
+
+.notifications label, .notifications input {
+    display: block;
+}
+
+.notifications div {
+    margin-bottom: 16px;
+    margin-top: 25px;
+}
+
+.notifications label {
+    color: #575656;
+}
+
+.notifications input {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.notifications p {
+    padding: 0px !important;
+    font-weight: normal !important;
+    margin: 0px !important;
+}
+
+.DSpsific select {
+    max-height: 102px;
+    min-height: 102px;
+}
+
+/********************************************************* end notification pages *******************************************************************/
+
+/************************************* Request Details page Style ************************************/
+
+.card .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card .card .header {
+    background: #99b5cf;
+    padding: 20px;
+    font-size: 20px;
+    color: #fff;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.card .card .title {
+    color: grey;
+    font-size: 18px;
+    border: 1px solid #eee;
+    margin: 15px;
+}
+
+#customerImage, 
+.req-info .req-info-img img {
+    width: 286px !important;
+    height: 263px !important;
+    padding: 20px;
+    display: inline-block;
+}
+#customerImage{
+    border-radius: 50%;
+    margin: 24px auto;
+    padding: 2px;
+}
+.card .card p {
+    color: #4b6880;
+    padding: 3px 40px 9px;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 4px;
+}
+
+.card .card p:last-child {
+    margin-bottom: 25px;
+}
+
+.card .card p span {
+    color: #000;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+/****************************************************image in Request Details********************************************/
+
+.req-info .req-info-img {
+    display: none;
+    margin-bottom: 10px;
+}
+
+.req-info .req-info-img img {
+    border-radius: 5px;
+    width: 100%;
+    max-width: 260px;
+    height: 220px;
+}
+
+/*********************************** End Request Details Style *******************************/
+
+/************************************ Responsive desing *******************************/
+
+/************ Portrait tablet to landscape and desktop **************/
+
+@media (max-width: 1050px) and (min-width: 992px) {
+
+    #Category #cattb tbody tr td:nth-child(4) button {
+        margin-left: 0px;
+        display: none
+    }
+
+    #Category #cattb tbody tr td:nth-child(4) button:nth-child(3),
+    #country #countrytb tbody tr td:nth-child(3) button:nth-child(1) ,
+    #city #citytb tbody tr td:nth-child(3) button:nth-child(1) {
+
+        display: inline-block;
+    }
+
+    #pending table thead tr th:nth-child(2), 
+    #pending table tbody tr td:nth-child(2), 
+    #pending table thead tr th:nth-child(3), 
+    #pending table tbody tr td:nth-child(3), 
+    #pending table thead tr th:nth-child(4), 
+    #pending table tbody tr td:nth-child(4), 
+    #pending table thead tr th:nth-child(5), 
+    #pending table tbody tr td:nth-child(5),
+    #country #countrytb tbody tr td:nth-child(3) button:nth-child(3),
+    #country #countrytb tbody tr td:nth-child(3) button:nth-child(4),
+    #city #citytb tbody tr td:nth-child(3) button:nth-child(3) ,
+    #city #citytb tbody tr td:nth-child(3) button:nth-child(4) {
+        display: none;
+    }
+}
+   
+
+@media (max-width: 1487px) and (min-width: 769px) {
+    #customer #custb tr td:first-child, 
+    #customer #custb tr th:first-child, 
+    #freelancer #frtb tr td:first-child, 
+    #freelancer #frtb tr th:first-child {
+        display: table-cell;
+    }
+
+    #customer #custb tr td:nth-child(2), 
+    #customer #custb tr th:nth-child(2), 
+    #freelancer #frtb tr td:nth-child(2), 
+    #freelancer #frtb tr th:nth-child(2) {
+        display: table-cell;
+    }
+
+    #customer #custb tr button:nth-child(1), 
+    #freelancer #frtb tr button:nth-child(1), 
+    #customer #custb tr button:nth-child(2), 
+    #freelancer #frtb tr button:nth-child(2), 
+    #customer #custb tr button:nth-child(3), 
+    #freelancer #frtb tr button:nth-child(3), 
+    #customer #custb tr button:nth-child(4),
+     #customer #custb tr button:nth-child(7), 
+    #freelancer #frtb tr button:nth-child(4), 
+    #freelancer #frtb tr button:nth-child(7), 
+    #profile #divtb table thead tr th:nth-child(2),
+    #profile #divtb table tbody tr td:nth-child(2),
+    #country #countrytb tbody tr td:nth-child(3) button:nth-child(3),
+    #country #countrytb tbody tr td:nth-child(3) button:nth-child(4),
+    #city #citytb tbody tr td:nth-child(3) button:nth-child(3),
+    #city #citytb tbody tr td:nth-child(3) button:nth-child(4){
+        display: none;
+    }
+
+    #customer #custb tr button:nth-child(5), 
+    #freelancer #frtb tr button:nth-child(5),
+    #country #countrytb tbody tr td:nth-child(3) button:nth-child(1),
+    #city #citytb tbody tr td:nth-child(3) button:nth-child(1){
+        display: inline-block;
+    }
+
+    #customer #custb tr td:nth-child(6), 
+    #customer #custb tr th:nth-child(6), 
+    #freelancer #frtb tr td:nth-child(5), 
+    #freelancer #frtb tr th:nth-child(5) {
+        width: 10% !important;
+    }
+}
+
+@media (max-width: 769px) {
+
+    .card-body {
+        padding-right: 11px !important;
+        padding-left: 11px !important;
+    }
+
+    .employee, .orders {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .main-Employee,
+    .main-category,
+    .main-Orders,
+    .main-orderDetails,
+    .main-location {
+        padding-right: 5px !important;
+        padding-left: 5px !important;
+    }
+
+    .nn,div#divContainer {
+        padding: 0px 7px 0px 7px !important;
+        box-shadow: none;
+    }
+    
+    #customer #custb tr td:first-child, 
+    #customer #custb tr th:first-child, 
+    #freelancer #frtb tr td:first-child, 
+    #freelancer #frtb tr th:first-child,
+    #customer #custb tr td:nth-child(2), 
+    #customer #custb tr th:nth-child(2), 
+    #freelancer #frtb tr td:nth-child(2), 
+    #freelancer #frtb tr th:nth-child(2),
+    #customer #custb tr button:nth-child(1), 
+    #freelancer #frtb tr button:nth-child(1),
+    #customer #custb tr button:nth-child(2), 
+    #freelancer #frtb tr button:nth-child(2), 
+    #customer #custb tr button:nth-child(3), 
+    #freelancer #frtb tr button:nth-child(3), 
+    #customer #custb tr button:nth-child(4), 
+    #customer #custb tr button:nth-child(7), 
+    #freelancer #frtb tr button:nth-child(4),
+    #freelancer #frtb tr button:nth-child(7),
+    .main-Orders table thead tr th:nth-child(2), 
+    .main-Orders table tbody tr td:nth-child(2), 
+    .main-Orders table thead tr th:nth-child(3), 
+    .main-Orders table tbody tr td:nth-child(3), 
+    .main-Orders table thead tr th:nth-child(4), 
+    .main-Orders table tbody tr td:nth-child(4), 
+    .main-Orders table thead tr th:nth-child(5), 
+    .main-Orders table tbody tr td:nth-child(5), 
+    #profile #divtb table thead tr th:nth-child(2), 
+    #profile #divtb table tbody tr td:nth-child(2),
+    #CMFinish table thead tr th:nth-child(6), 
+    #CMFinish table tbody tr td:nth-child(6), 
+    #FFinish table thead tr th:nth-child(6), 
+    #FFinish table tbody tr td:nth-child(6), 
+    #working table thead tr th:nth-child(6), 
+    #working table tbody tr td:nth-child(6),
+    #country #countrytb tbody tr td:nth-child(3) button:nth-child(3),
+    #country #countrytb tbody tr td:nth-child(3) button:nth-child(4),
+    #city #citytb tbody tr td:nth-child(3) button:nth-child(3),
+    #city #citytb tbody tr td:nth-child(3) button:nth-child(4) {
+        display: none;
+    }
+  
+    #customer #custb tr th:nth-child(3), #freelancer #frtb tr th:nth-child(3) {
+        border-top-left-radius: 10px;
+    }
+  
+    #customer #custb tr button:nth-child(5), 
+    #freelancer #frtb tr button:nth-child(5) {
+        display: inline-block;
+    }
+
+    #customer #custb tr td:nth-child(6), 
+    #customer #custb tr th:nth-child(6), 
+    #freelancer #frtb tr td:nth-child(5), 
+    #freelancer #frtb tr th:nth-child(5) {
+        width: 10% !important;
+    }
+
+    #Category #cattb tbody tr td:nth-child(4) button {
+        margin-left: 0px;
+        display: none
+    }
+
+    #Category #cattb tbody tr td:nth-child(4) button:nth-child(3),
+    #country #countrytb tbody tr td:nth-child(3) button:nth-child(1),
+    #city #citytb tbody tr td:nth-child(3) button:nth-child(1){
+        display: inline-block;
+    }
+
+    #country #countrytb tbody tr td:nth-child(3) button:nth-child(1),
+    #city #citytb tbody tr td:nth-child(3) button:nth-child(1){
+        padding:0px;
+        width: 67px;
+        height: 38px;
+    }
+   
+}
+
+@media (max-width: 531px) {
+    #Category #cattb tbody tr td:nth-child(2), 
+    #Category #cattb thead tr th:nth-child(2), 
+    #Category #cattb thead tr th:nth-child(3), 
+    #Category #cattb tbody tr td:nth-child(3) {
+        display: none;
+    }
+}
