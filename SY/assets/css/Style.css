@@ -417,7 +417,7 @@ thead tr th:last-child {
     left: 45%;
 }
 
-.spinner-border-edit {
+#spinner-border-edit {
     display: none;
 }
 
@@ -429,7 +429,8 @@ thead tr th:last-child {
     min-width: 18%;
 }
 
-#editFreelancer button[onclick="imageBrowserFreelancer()"] {
+#editFreelancer button[onclick="imageBrowserFreelancer()"],
+#editCompany button[onclick="imageBrowserFreelancer()"] {
     width: 100%;
     padding: 0px;
     text-align: center;
@@ -449,7 +450,8 @@ thead tr th:last-child {
     word-spacing: 2px;
 }
 
-#editFreelancer .img-spiner-container {
+#editFreelancer .img-spiner-container,
+#editCompany .img-spiner-container {
     margin-bottom: 20px;
     width: 100%;
     height: 320px;
@@ -465,7 +467,10 @@ thead tr th:last-child {
     border-radius: 50%;
 }
 
-#editFreelancer .input-form input, #editFreelancer .input-form select {
+#editFreelancer .input-form input,
+#editFreelancer .input-form select,
+#editCompany .input-form input,
+#editCompany .input-form select {
     margin-top: -15px;
     margin-bottom: 28px;
 }
@@ -499,7 +504,26 @@ thead tr th:last-child {
 }
 
 /********************************* end freelancer Style Page ***********************/
+/********************************* Start Company Style Page ***********************/
+#comCat,
+#comCity{
+    display: inline-block;
+    width: 70%;
+}
 
+#editCompany button[onclick="selectMutliCat(event)"],
+#editCompany button[onclick="selectMutliCity(event)"]{
+    display: inline;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    width: 15%;
+    margin-left: 25px;
+}
+
+#attachmentDiv{
+    display: none;
+}
+/********************************* End Company Style Page *************************/
 /******************************** Start Category Style Page **********************/
 
 #Category #cattb thead tr th:nth-child(1), #Category #cattb tbody tr td:nth-child(1) {

@@ -58,6 +58,7 @@ function readpendingData() {
             });
         }
         companyAddress.textContent = snap.val().companyLocationAddress;
+        $("#companyAttachment").attr("href", snap.val().companyAttachment)
     });
 
 

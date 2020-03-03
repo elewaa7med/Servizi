@@ -217,7 +217,7 @@
                                                 <img id="imgfr" class="img" src="../img/logo.jpg"
                                                     style="width: 100%;height: 100%;" />
                                                 <div class="spiner-center text-center">
-                                                    <div class="spinner-border-edit" role="status">
+                                                    <div class="spinner-border" id="spinner-border-edit" role="status">
                                                         <span class="sr-only">Loading...</span>
                                                     </div>
                                                 </div>
@@ -271,7 +271,7 @@
                                                 <img id="imgCom" class="img" src="../img/logo.jpg"
                                                     style="width: 100%;height: 100%;" />
                                                 <div class="spiner-center text-center">
-                                                    <div class="spinner-border-edit" role="status">
+                                                    <div class="spinner-border" id="spinner-border-edit" role="status">
                                                         <span class="sr-only">Loading...</span>
                                                     </div>
                                                 </div>
@@ -287,14 +287,16 @@
                                             <input id="comName" type="text" class="form-control" />
                                             <label>Phone</label>
                                             <input id="comPh" type="text" class="form-control" />
-                                            <label>Select Category</label>
+                                            
+                                            <label>Select Category</label><br/>
                                             <input type="text" id="comCat" class="form-control" readonly>
                                             <button class="btn btn-warning"
-                                                onclick="selectMutliCat(event)">Edit</button>
-                                            <label>Select city</label>
+                                                onclick="selectMutliCat(event)">Edit</button><br/>
+
+                                            <label>Select city</label><br/>
                                             <input type="text" id="comCity" class="form-control" readonly>
                                             <button class="btn btn-warning"
-                                                onclick="selectMutliCity(event)">Edit</button>
+                                                onclick="selectMutliCity(event)">Edit</button><br/>
                                             <label>Address</label>
                                             <input id="AddCom" type="text" class="form-control" />
                                         </div>
@@ -302,7 +304,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="editecomp" onclick="editfr()"
+                                    <button type="button" class="btn btn-primary" id="editecomp" onclick="editCom()"
                                         data-dismiss="modal">Save Changes</button>
                                 </div>
                             </div>

@@ -538,7 +538,7 @@ function excuteNotification(title, body, token, page) {
 /********** End Execute send notificatin using Ajax technology **************/
 /********************************** End Send Notifcation All Method ******************************** */
 
-/********************** button of edite FreeLancer Clicked *****************/
+/********************** Start button of edite FreeLancer&Company Clicked *****************/
 function editfr() {
     var editefr = document.getElementById("editefr"),
         namecm = document.getElementById("Nfr"),
@@ -571,6 +571,32 @@ function editfr() {
             });
     }
 }
+
+function editCom() {
+    var comName = document.getElementById("comName"),
+        comPh = document.getElementById("comPh"),
+        comCat = document.getElementById("comCat"),
+        comCity = document.getElementById("comCity"),
+        AddCom = document.getElementById("AddCom"),
+        imgCom = document.getElementById("imgCom"),
+        AllCityIds = comCity.getAttribute("cityid").split(" , "),
+        countryId = comCity.getAttribute("countryid");
+    ComsRef = dbRef.child('Company/' + $("#editecomp").attr("com-key"));
+    ComsRef.update({
+        "companyLocationAddress": AddCom.value,
+        "companyNameInEnglish": comName.value,
+        "companyPhone": comPh.value,
+        "companyPhoto": imgCom.src,
+        "companyCategoryId": comCat.getAttribute("catid").split(" , ")
+    }).then(function () {
+        ComsRef.child("companyLocation").update({
+            "cityId": AllCityIds,
+            "countryId":countryId
+        });
+    });
+}
+/********************** End button of edite FreeLancer&Company Clicked *****************/
+
 /******************* button Add of New Employee Clicked ***************** */
 function addUserBtnClicked() {
     if (NewPassword() == 0 & checkMail() == true & checkUserName() == true & checkName() == true & checkPrivilages() == true & ConfirmPassword() == true) {
@@ -600,7 +626,6 @@ function addUserBtnClicked() {
             var v = 1;
             // loop through View to get the data for the model
             for (let i = 0, len = addUserInputsUI.length; i < len; i++) {
-
                 let key = addUserInputsUI[i].getAttribute('data-key');
                 let value = addUserInputsUI[i].value;
                 if (value == "") { v = 0; break; }
@@ -1194,7 +1219,6 @@ function createCompanyRows(snap, companyListUI) {
                 $li.classList.add("deactiveColor");
                 activeButton.textContent = "Active";
                 dropdown += "<a class='dropdown-item' onclick='ChangeCompanyState(event)' companyId='" + snap.key + "'>Active</a>"
-
             }
         }
     });
@@ -1241,8 +1265,6 @@ function createCompanyRows(snap, companyListUI) {
     $li.append(col3);
     $li.append(col4);
     $li.append(operation);
-    console.log($li);
-
     companyListUI.append($li);
 }
 
@@ -1392,9 +1414,8 @@ $('#editFreelancer').on('show.bs.modal', function (event) {
 $('#editCompany').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var companyid = button.data('companyid');
-    console.log(companyid) // Extract info from data-* attributes
     var modal = $(this)
-    modal.find('#editecomp').attr('user-key', companyid);
+    modal.find('#editecomp').attr('Com-key', companyid);
     var comName = document.getElementById("comName"),
         comPh = document.getElementById("comPh"),
         comCat = document.getElementById("comCat"),
@@ -1488,12 +1509,11 @@ $('#editCatCit').on('show.bs.modal', function (event) {
         var priviousSelectedCat = $("#comCat").attr("catId").split(",");
         catRef.once("value", snapshot => {
             snapshot.forEach(snapChild => {
-                console.log(snapChild.val());
                 $("#AllCatCity").prepend("<input class='checkbox' type='checkbox' value='" + snapChild.val().categoryName + "' id='" + snapChild.key + "'/><label >" + snapChild.val().categoryName + "</label> </br>");
-                $("#AllCatCity .checkbox").change(function() {
-                    if(this.checked) {
+                $("#AllCatCity .checkbox").change(function () {
+                    if (this.checked) {
                         this.setAttribute("checked", "checked");
-                    }else{
+                    } else {
                         this.removeAttribute("checked");
                     }
                 });
@@ -1508,10 +1528,10 @@ $('#editCatCit').on('show.bs.modal', function (event) {
         citysRef.child(document.getElementById("comCity").getAttribute("countryId")).once("value", snapshot => {
             snapshot.forEach(snapChild => {
                 $("#AllCatCity").prepend("<input class='checkbox' type='checkbox' value='" + snapChild.val().cityName + "' id='" + snapChild.key + "'/><label >" + snapChild.val().cityName + "</label> </br>");
-                $("#AllCatCity .checkbox").change(function() {
-                    if(this.checked) {
+                $("#AllCatCity .checkbox").change(function () {
+                    if (this.checked) {
                         this.setAttribute("checked", "checked");
-                    }else{
+                    } else {
                         this.removeAttribute("checked");
                     }
                 });
@@ -1522,35 +1542,33 @@ $('#editCatCit').on('show.bs.modal', function (event) {
         });
     }
 });
-function addCatCity(e){
+function addCatCity(e) {
     if (e.target.textContent == "Add Categories") {
-        var AllInputValue ="" , AllInputId ="";
-        $("#AllCatCity .checkbox").each(value =>{
-            if($("#AllCatCity .checkbox")[value].getAttribute("checked") == "checked")
-            {
+        var AllInputValue = "", AllInputId = "";
+        $("#AllCatCity .checkbox").each(value => {
+            if ($("#AllCatCity .checkbox")[value].getAttribute("checked") == "checked") {
                 AllInputId += $("#AllCatCity .checkbox")[value].getAttribute("id") + " , ";
                 AllInputValue += $("#AllCatCity .checkbox")[value].getAttribute("value") + " , ";
             }
         });
         AllInputValue = AllInputValue.substring(0, AllInputValue.lastIndexOf(",") - 1);
         AllInputId = AllInputId.substring(0, AllInputId.lastIndexOf(",") - 1);
-        
-        $("#comCat").attr("catId",AllInputId);
+
+        $("#comCat").attr("catId", AllInputId);
         $("#comCat").val(AllInputValue);
     }
     if (e.target.textContent == "Add Cities") {
-        var AllInputValue ="" , AllInputId ="";
-        $("#AllCatCity .checkbox").each(value =>{
-            if($("#AllCatCity .checkbox")[value].getAttribute("checked") == "checked")
-            {
+        var AllInputValue = "", AllInputId = "";
+        $("#AllCatCity .checkbox").each(value => {
+            if ($("#AllCatCity .checkbox")[value].getAttribute("checked") == "checked") {
                 AllInputId += $("#AllCatCity .checkbox")[value].getAttribute("id") + " , ";
                 AllInputValue += $("#AllCatCity .checkbox")[value].getAttribute("value") + " , ";
             }
         });
         AllInputValue = AllInputValue.substring(0, AllInputValue.lastIndexOf(",") - 1);
         AllInputId = AllInputId.substring(0, AllInputId.lastIndexOf(",") - 1);
-        
-        $("#comCity").attr("cityId",AllInputId);
+
+        $("#comCity").attr("cityId", AllInputId);
         $("#comCity").val(AllInputValue);
     }
 }
@@ -1563,7 +1581,7 @@ var fileButtonfr = document.getElementById('File1fr');
 var imgfr = document.getElementById('imgfr');
 fileButtonfr.addEventListener('change', function (e) {
     $("#editFreelancer img").hide();
-    $("#editFreelancer  .spinner-border").show();
+    $("#editFreelancer  #spinner-border-edit").show();
     $("#editefr").attr("disabled", "disabled");
     var file = e.target.files[0];
     imgfr.src = "";
@@ -1573,10 +1591,29 @@ fileButtonfr.addEventListener('change', function (e) {
         var jj = snapshot.downloadURL;
         imgfr.src = jj;
         $("#editFreelancer img").show();
-        $("#editFreelancer  .spinner-border").hide();
+        $("#editFreelancer  #spinner-border-edit").hide();
         $("#editefr").removeAttr("disabled");
     });
     //var gg = firebase.storage().ref('img/' + file.name).fullPath();
+});
+
+var fileButtonCom = document.getElementById('File1Com');
+var imgCom = document.getElementById('imgCom');
+fileButtonfr.addEventListener('change', function (e) {
+    $("#editCompany img").hide();
+    $("#editCompany  #spinner-border-edit").show();
+    $("#editecomp").attr("disabled", "disabled");
+    var file = e.target.files[0];
+    imgCom.src = "";
+    var storageRef = firebase.storage().ref('img/' + file.name);
+    var task = storageRef.put(file).then((snapshot) => {
+        // added this part which as grabbed the download url from the pushed snapshot
+        var jj = snapshot.downloadURL;
+        imgCom.src = jj;
+        $("#editCompany img").show();
+        $("#editCompany  #spinner-border-edit").hide();
+        $("#editecomp").removeAttr("disabled");
+    });
 });
 /***************************** End Confirmation Dialog Retrive Data and do Some Action ********************/
 function imageBrowserFreelancer() {
@@ -1626,6 +1663,4 @@ function DeleteFreelncer(e) {
             });
         });
     });
-
-
 }
