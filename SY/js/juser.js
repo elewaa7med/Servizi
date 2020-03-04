@@ -80,21 +80,16 @@ if (localStorage.getItem("currentPage") == "company") {
         snapshot.forEach(function (element) {
             var key = element.key,
                 value = element.val();
-
-
             if (key == "userName") {
                 col1.append(value);
             }
-
             if (key == "email") {
                 col2.append(value);
             }
-
             if (key == "type") {
                 col3.append(value);
                 if (value != "Admin") {
                     td_delete.innerHTML = "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#ConfirmModal' data-employeeid='" + snapshot.key + "' data-keyword='Delete' style='cursor: pointer'>Delete</button>";
-
                 }
             }
         });
@@ -107,6 +102,7 @@ if (localStorage.getItem("currentPage") == "company") {
         counter++;
         $("#spinnerLoaderEmp").attr("style", "display:none");
     });
+
     employeesRef.once("value", snap => {
         if (counter == snap.numChildren()) {
             pagination("#custb");
@@ -118,16 +114,17 @@ if (localStorage.getItem("currentPage") == "company") {
             $("#EmpEmptyTable td").text("No Employee Created Yet");
         }
     });
+
     employeesRef.on('child_removed', function (snapshot) {
         var tableRow = document.getElementById(snapshot.key);
         tableRow.remove();
     });
+
 })();
 /********************** Start Read **Employee** Data from Firebase Database And Change Happen To Table Data *******************/
 
 /********************** Start Read **Customer** Data from Firebase Database And Change Happen To Table Data *******************/
 (function () {
-
     const userListUI = document.getElementById("cus-list");
     var counter = 0;
     cusRef.on("child_added", function (snapshot) {
@@ -144,7 +141,7 @@ if (localStorage.getItem("currentPage") == "company") {
             col4 = document.createElement("td"),
             col5 = document.createElement("td"),
             operation = document.createElement("td");
-        let DeleteCustomer = null;
+        // let DeleteCustomer = null;
         var deteledRow = false;
         $li.classList.add("inList");
         var dropdown =
@@ -165,7 +162,6 @@ if (localStorage.getItem("currentPage") == "company") {
         customerTypeButton.classList = "btn  btn-warning";
         customerTypeButton.setAttribute("customerid", snapshot.key);
         customerTypeButton.setAttribute("onclick", "ChangeCustomerType(event)");
-
 
         snapshot.forEach(function (element) {
             var key = element.key,
@@ -217,8 +213,9 @@ if (localStorage.getItem("currentPage") == "company") {
             operation.append(customerTypeButton);
             if (userType == "Admin") {
                 dropdown +=
-                    "<a class='dropdown-item' customerid='" + snapshot.key + "' onclick='deleteCustomer(event)'>Detete</a>"
-                    + "<a class='dropdown-item' data-toggle='modal' data-target='#sendNotificationModal'"
+                    // "<a class='dropdown-item' customerid='" + snapshot.key + "' onclick='deleteCustomer(event)'>Detete</a>"
+                    // + 
+                    "<a class='dropdown-item' data-toggle='modal' data-target='#sendNotificationModal'"
                     + " data-whatever = '" + snapshot.val().messageToken + "' data-whatever2='" + snapshot.val().phoneNumber
                     + "' data-whatever3 = '" + snapshot.key + "' data-whatever4 = customer "
                     + ">Send Notification</a></div>"
@@ -234,18 +231,18 @@ if (localStorage.getItem("currentPage") == "company") {
                 /******************
                 * <button class="btn btn-warning" onclick="function()" customer_id="value">Delete Customer</button>
                 ******************/
-                DeleteCustomer = document.createElement("button");
-                DeleteCustomer.classList = "btn  btn-warning";
-                DeleteCustomer.setAttribute("customerid", snapshot.key);
-                DeleteCustomer.setAttribute("onclick", "deleteCustomer(event)");
-                DeleteCustomer.textContent = "Delete";
+                // DeleteCustomer = document.createElement("button");
+                // DeleteCustomer.classList = "btn  btn-warning";
+                // DeleteCustomer.setAttribute("customerid", snapshot.key);
+                // DeleteCustomer.setAttribute("onclick", "deleteCustomer(event)");
+                // DeleteCustomer.textContent = "Delete";
                 operation.append(customernotifiybutton);
             }
             operation.innerHTML += dropdown;
 
-            if (DeleteCustomer != null) {
-                operation.append(DeleteCustomer);
-            }
+            // if (DeleteCustomer != null) {
+            //     operation.append(DeleteCustomer);
+            // }
             $li.append(col1);
             $li.append(col2);
             $li.append(col3);
@@ -544,7 +541,9 @@ function editfr() {
         namecm = document.getElementById("Nfr"),
         phonecm = document.getElementById("Phfr"),
         categoryfr = document.getElementById("Free-Category"),
+        cityfr = document.getElementById("Free-City"),
         Addcm = document.getElementById("Addfr");
+        
     if (namecm.value == "") {
         namecm.focus();
         md.showerror('top', 'center');
@@ -558,8 +557,6 @@ function editfr() {
         md.showerror('top', 'center');
     }
     else {
-
-        freeRef = dbRef.child('Workers/' + editefr.getAttribute("user-key")),
             cmRef.child(editefr.getAttribute("user-key")).update({
                 "workerPhoto": imgfr.src,
                 "workerLocationAdress": Addcm.value,
@@ -567,7 +564,9 @@ function editfr() {
                 "workerCategoryid": categoryfr.value,
                 "workerNameInEnglish": namecm.value,
             }).then(function () {
-
+                cmRef.child(editefr.getAttribute("user-key") +"/workerLocation").update({
+                    "cityId" : cityfr.value
+                });
             });
     }
 }
@@ -591,7 +590,7 @@ function editCom() {
     }).then(function () {
         ComsRef.child("companyLocation").update({
             "cityId": AllCityIds,
-            "countryId":countryId
+            "countryId": countryId
         });
     });
 }
@@ -1081,7 +1080,7 @@ function createFreelancerRows(snap, userListUI) {
         col3 = document.createElement("td"),
         col4 = document.createElement("td"),
         operation = document.createElement("td");
-    let DeleteFreelancer = null;
+    // let DeleteFreelancer = null;
     $li.classList.add("inList");
     var dropdown =
         "<button class='btn btn-warning dropdown-toggle' type = 'button' id = 'dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' > Action</button>"
@@ -1129,14 +1128,11 @@ function createFreelancerRows(snap, userListUI) {
     operation.innerHTML = "<button type='button' class='btn btn-warning' onclick='directwithfreeId(\"" + snap.key + "\")' >show</button>";
     operation.append(activeButton);
     operation.append(EditFreeButton);
-    /******************
-* <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="token message">Open modal for @mdo</button>
-    ******************/
-
     if (userType == "Admin") {
         dropdown +=
-            "<a class='dropdown-item' freelancerid='" + snap.key + "' onclick='DeleteFreelncer(event)'>Detete</a>"
-            + "<a class='dropdown-item' data-toggle='modal' data-target='#sendNotificationModal'"
+            // "<a class='dropdown-item' freelancerid='" + snap.key + "' onclick='DeleteFreelncer(event)'>Detete</a>"
+            // + 
+            "<a class='dropdown-item' data-toggle='modal' data-target='#sendNotificationModal'"
             + " data-whatever = '" + snap.val().messageToken + "' data-whatever2='" + snap.val().workerPhone
             + "' data-whatever3 = '" + snap.key + "' data-whatever4 = freelancer "
             + ">Send Notification</a></div>";
@@ -1150,18 +1146,18 @@ function createFreelancerRows(snap, userListUI) {
         freenotifiybutton.setAttribute("data-whatever3", snap.key);
         freenotifiybutton.setAttribute("data-whatever4", "freelancer");
 
-        DeleteFreelancer = document.createElement("button");
-        DeleteFreelancer.classList = "btn  btn-warning";
-        DeleteFreelancer.setAttribute("customerid", snap.key);
-        DeleteFreelancer.setAttribute("onclick", "DeleteFreelncer(event)");
-        DeleteFreelancer.textContent = "Delete";
+        // DeleteFreelancer = document.createElement("button");
+        // DeleteFreelancer.classList = "btn  btn-warning";
+        // DeleteFreelancer.setAttribute("customerid", snap.key);
+        // DeleteFreelancer.setAttribute("onclick", "DeleteFreelncer(event)");
+        // DeleteFreelancer.textContent = "Delete";
         operation.append(freenotifiybutton);
     }
     operation.innerHTML += dropdown;
 
-    if (DeleteFreelancer != null) {
-        operation.append(DeleteFreelancer);
-    }
+    // if (DeleteFreelancer != null) {
+    //     operation.append(DeleteFreelancer);
+    // }
 
     $li.id = snap.key;
     $li.append(col1);
@@ -1390,6 +1386,7 @@ $('#editFreelancer').on('show.bs.modal', function (event) {
     var namefr = document.getElementById("Nfr"),
         phonefr = document.getElementById("Phfr"),
         categoryfr = document.getElementById("Free-Category"),
+        cityfr = document.getElementById("Free-City"),
         Addfr = document.getElementById("Addfr"),
         imgufr = document.getElementById("imgpfr");
     cmRef.child(freeid).on("value", snapChild => {
@@ -1408,7 +1405,18 @@ $('#editFreelancer').on('show.bs.modal', function (event) {
                 categoryfr.append(select);
             });
         });
-        Addfr.value = snapChild.val().workerLocation.city;
+        citysRef.child(snapChild.val().workerLocation.countryId).on("value",citySnapShot =>{
+            citySnapShot.forEach(CityChildSnapShot =>{
+                var select = document.createElement("option");
+                select.value = CityChildSnapShot.key;
+                select.textContent = CityChildSnapShot.val().cityName;
+                if(snapChild.val().workerLocation.cityId == CityChildSnapShot.key){
+                    select.setAttribute("selected","on");
+                }
+                cityfr.append(select);
+            });
+        })
+        Addfr.value = snapChild.val().workerLocationAdress;
     });
 });
 $('#editCompany').on('show.bs.modal', function (event) {
@@ -1622,45 +1630,45 @@ function imageBrowserFreelancer() {
 }
 
 
-function deleteCustomer(e) {
-    var customerId = e.target.getAttribute("customerid");
-    // Delete All customer notification 
-    NotificationCustomer.child(customerId).remove();
-    //move All Related Request to Deteted Requests Database
-    requestRef.orderByChild("customerId").equalTo(customerId).on("child_added", function (snapshot) {
-        DeteledrequestRef.child(snapshot.key).set(snapshot.val()).then(function () {
-            // Remove All Related Request
-            requestRef.child(snapshot.key).remove();
-            cusRef.orderByChild("userId").equalTo(customerId).on("child_added", function (snapshot) {
-                snapshot.ref.update({
-                    "login": "false",
-                    "messageToken": "",
-                    "activiationState": "Deleted"
-                }).then(function () {
-                    //Remove table of Regphone 
-                    RegPhoneRef.orderByChild("customerId").equalTo(customerId).on("child_added", function (snapshot) {
-                        RegPhoneRef.child(snapshot.key).remove();
-                    });
-                });
-            });
-        });
-    });
-}
+// function deleteCustomer(e) {
+//     var customerId = e.target.getAttribute("customerid");
+//     // Delete All customer notification 
+//     NotificationCustomer.child(customerId).remove();
+//     //move All Related Request to Deteted Requests Database
+//     requestRef.orderByChild("customerId").equalTo(customerId).on("child_added", function (snapshot) {
+//         DeteledrequestRef.child(snapshot.key).set(snapshot.val()).then(function () {
+//             // Remove All Related Request
+//             requestRef.child(snapshot.key).remove();
+//             cusRef.orderByChild("userId").equalTo(customerId).on("child_added", function (snapshot) {
+//                 snapshot.ref.update({
+//                     "login": "false",
+//                     "messageToken": "",
+//                     "activiationState": "Deleted"
+//                 }).then(function () {
+//                     //Remove table of Regphone 
+//                     RegPhoneRef.orderByChild("customerId").equalTo(customerId).on("child_added", function (snapshot) {
+//                         RegPhoneRef.child(snapshot.key).remove();
+//                     });
+//                 });
+//             });
+//         });
+//     });
+// }
 
-function DeleteFreelncer(e) {
-    var freelancerId = e.target.getAttribute("freelancerid");
-    // Delete All customer notification 
-    NotificationFreelancer.child(freelancerId).remove();
-    cmRef.orderByChild("workerId").equalTo(freelancerId).on("child_added", function (snapshot) {
-        snapshot.ref.update({
-            "login": "false",
-            "messageToken": "",
-            "workerStatusActivation": "Deleted"
-        }).then(function () {
-            //Remove table of Regphone 
-            RegPhoneRef.orderByChild("customerId").equalTo(freelancerId).on("child_added", function (snapshot) {
-                RegPhoneRef.child(snapshot.key).remove();
-            });
-        });
-    });
-}
+// function DeleteFreelncer(e) {
+//     var freelancerId = e.target.getAttribute("freelancerid");
+//     // Delete All customer notification 
+//     NotificationFreelancer.child(freelancerId).remove();
+//     cmRef.orderByChild("workerId").equalTo(freelancerId).on("child_added", function (snapshot) {
+//         snapshot.ref.update({
+//             "login": "false",
+//             "messageToken": "",
+//             "workerStatusActivation": "Deleted"
+//         }).then(function () {
+//             //Remove table of Regphone 
+//             RegPhoneRef.orderByChild("customerId").equalTo(freelancerId).on("child_added", function (snapshot) {
+//                 RegPhoneRef.child(snapshot.key).remove();
+//             });
+//         });
+//     });
+// }

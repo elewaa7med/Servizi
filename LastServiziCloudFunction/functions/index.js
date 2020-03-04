@@ -79,7 +79,6 @@ exports.welcomeNotificationWorker = functions.database.ref('Workers/{workerId}')
 // send notification Depend on Request/any id / state
 exports.sendNotification = functions.database.ref('Requests/{ReqestId}/state')
     .onUpdate((change, context) => {
-
         const state = change.after.val();
         // when state change to post
         if (state === "POST") {
@@ -94,12 +93,11 @@ exports.sendNotification = functions.database.ref('Requests/{ReqestId}/state')
                 admin.database().ref("Users/" + customerId).once('value').then(element => {
                     const token = element.child("messageToken").val(),
                         titleValue = "Justcall-UAE",
-                        bodyValue = "Your Service Request Now Is Posted To FreeLnceers You will Recive Notification When They making Offers"+
+                        bodyValue = "Your Service Request Now Is Posted To FreeLnceers You will Recive Notification When They making Offers \n"+
                         "تم إرسال طلب الخدمة الخاص بك الآن إلى المستقلين ، وسوف تستلم إشعارًا عند تقديم العروض";
                     // var badgeCount = element.child("badge").val(),
                     // badgeNumber = parseInt(badgeCount) + 1;
                     // console.log(badgeNumber);
-
 
                     // Upload the new value of badge into Firebase to keep track of the number
                     var payload = {
@@ -134,14 +132,12 @@ exports.sendNotification = functions.database.ref('Requests/{ReqestId}/state')
                 // send notification to all worker within the (category & city ) of customer's service request
                 admin.database().ref("Workers").once('value').then(element => {
                     var titleValue = "Justcall-UAE",
-                        bodyValue = "You Have New Request Within Your City";
+                        bodyValue = "You Have New Request ,You can Make offer \n"+ "لديك طلب جديد ، يمكنك تقديم عرض الآن";
                     element.forEach((childOfElement) => {
                         var workerValue = childOfElement.val(),
-                            workerCategory,
-                            workerCity;
+                            workerCategory;
                         workerCategory = workerValue.workerCategoryid;
-                        workerCity = workerValue.workerLocation.city;
-                        if (workerCategory.localeCompare(categoryId) === 0 && workerCity.localeCompare(cityId) === 0) {
+                        if (workerCategory.localeCompare(categoryId) === 0) {
                             var token = workerValue.messageToken;
                             // badgeCount = workerValue.badge,
                             // badgeNumber = parseInt(badgeCount) + 1,
@@ -191,7 +187,7 @@ exports.sendNotification = functions.database.ref('Requests/{ReqestId}/state')
             admin.database().ref(change.after.ref.parent.path).once('value').then(snap => {
                 const customerId = snap.child("customerId").val(),
                     titleValue = "Justcall-UAE",
-                    bodyValue = "Freelancer Close Job , Job Has Been Finished Successfully.";
+                    bodyValue = "Freelancer finish Job , Job Has Been Finished Successfully. \n"+".العامل المستقل انهى العمل ، تم الانتهاء من الوظيفة بنجاح.";
                 admin.database().ref("Users/" + customerId).once('value').then(element => {
                     const token = element.child("messageToken").val();
                     console.log(token);
@@ -316,7 +312,7 @@ exports.sendNotification = functions.database.ref('Requests/{ReqestId}/state')
             admin.database().ref(change.after.ref.parent.path).once('value').then(snap => {
                 const customerId = snap.child("customerId").val(),
                     titleValue = "Justcall-UAE",
-                    bodyValue = " Your Job has been canceled\n";
+                    bodyValue = " Your Request has been canceled \n" + "تم إلغاء طلبك";
                 admin.database().ref("Users/" + customerId).once('value').then(element => {
                     const token = element.child("messageToken").val();
                     // var badgeCount = element.child("badge").val(),
@@ -376,7 +372,8 @@ exports.sendNotificationToSpecificFreelancer = functions.database.ref('Comments/
         admin.database().ref("Requests/" + snapshot.ref.parent.path.pieces_[1]).once('value').then(snap => {
             const customerId = snap.child("customerId").val(),
                 titleValue = "Justcall-UAE",
-                bodyValue = "Freelnacer Add New offer to your Request it's number " + snapshot.ref.parent.path.pieces_[1];
+                bodyValue = "Freelnacer Add New offer to your Request it's number " + snapshot.ref.parent.path.pieces_[1] + 
+                "\n إضافة عرض جديد لطلبك ، رقم" + snapshot.ref.parent.path.pieces_[1];
             admin.database().ref("Users/" + customerId).once('value').then(element => {
                 const token = element.child("messageToken").val();
                 // var badgeCount = element.child("badge").val(),
@@ -429,7 +426,6 @@ exports.sendNotificationToSpecificFreelancer = functions.database.ref('Comments/
                         orderId: snap.child("orderId").val()
                     });
                     // admin.database().ref("Users/" + customerId).update({ badge: badgeNumber });
-
                     admin.database().ref("CPNotification").push().set({
                         customerId: customerId,
                         freelancerId: snapshot.val().freelancerId,
@@ -439,7 +435,6 @@ exports.sendNotificationToSpecificFreelancer = functions.database.ref('Comments/
                         time: new Date(),
                         orderId: snap.child("orderId").val()
                     });
-
                 }
                 return;
             }).catch(error => { console.log(error) });
@@ -455,7 +450,8 @@ exports.sendNotificationCustomerConnection = functions.database.ref('FreeCustome
         admin.database().ref("Workers/" + snapshot.val().freelancerId).once('value').then(element => {
             const token = element.child("messageToken").val(),
                 titleValue = "Justcall-UAE",
-                bodyValue = "Customer Accepte Your Offer On Request " + snapshot.val().requestId;
+                bodyValue = "Customer Accepte Your Offer On Request " + snapshot.val().requestId + 
+                "\n لقد قبل العميل على عرضك على الطلب " + snapshot.val().requestId;
             // var badgeCount = element.child("badge").val(),
             // badgeNumber = parseInt(badgeCount) + 1;
             // console.log(badgeNumber);
@@ -567,7 +563,6 @@ exports.confirmCPReciveRequest = functions.database.ref('Requests/{requestId}')
 
 exports.RattingNotification = functions.database.ref('Requests/{ReqestId}/rate')
     .onUpdate((change, context) => {
-
         // var ratingID = change.after.val(),
         //     message, numOfStars;
         // admin.database().ref("Ratings/" + ratingID).once('value').then(element => {
@@ -580,7 +575,7 @@ exports.RattingNotification = functions.database.ref('Requests/{ReqestId}/rate')
                     admin.database().ref("Workers/" + element.val().freelancerId).once('value').then(workerSnap => {
                         const token = workerSnap.child("messageToken").val(),
                             titleValue = "Justcall-UAE",
-                            bodyValue = "Customer Rate Your Request";
+                            bodyValue = "Customer Rate Your Request" + "\n لقد قام العميل بتقيم عملك على طلبه";
                         if (token !== undefined) {
                             var payload = {
                                 notification: {
