@@ -190,6 +190,12 @@ div#divContainer {
 
 /************************************ End general Style ********************************************/
 
+/************************************ Start Login Syle Page ****************************************/
+.user_card input{
+    background-image: none;
+}
+/************************************ End Login Syle Page ****************************************/
+
 /********************************* Start Employee Style Page ***********************/
 
 #profile select.form-control:not([size]):not([multiple]) {
