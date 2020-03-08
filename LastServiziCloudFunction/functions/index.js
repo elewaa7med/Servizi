@@ -117,7 +117,7 @@ exports.welcomeNotificatioCompany = functions.database.ref('Company/{companyId}'
         }
         return;
     });
-/********** Start Welcome Messagese (Clients,Freelancer,Company) *********************************88 */
+/********** End Welcome Messagese (Clients,Freelancer,Company) *********************************88 */
 
 /********** Start Notify Customer CP Recive His Order ************/
 // notify customer that he's request is already sent to Control Panel
@@ -166,7 +166,7 @@ exports.confirmCPReciveRequest =
 /********** End  Notify Customer CP Recive His Order ************/
 
 /*********** Start send notification Depend on Request state Changed ********/
-exports.sendNotification =
+exports.sendNotificationWhenRequestStateChange =
     functions.database.ref('Requests/{ReqestId}/state').onUpdate((change, context) => {
         const state = change.after.val();
         /* ************* 
@@ -240,7 +240,7 @@ exports.sendNotification =
                 const categoryId = snap.child("categoryId").val();
                 var SendingDevices = [],
                     counter = 0;
-                /********** Start (Customer) -> Now You Work With Freelancer **** */
+        /********** Start (Customer) -> Now You Work With Freelancer **** */
                 admin.database().ref("Users/" + customerId).once('value').then(element => {
                     const token = element.child("messageToken").val(),
                         titleValue = "Justcall-UAE",
@@ -278,9 +278,9 @@ exports.sendNotification =
                         });
                     return;
                 }).catch(error => { });
-                /********** End (Customer) -> Now You Work With Freelancer **** */
+        /********** End (Customer) -> Now You Work With Freelancer **** */
 
-                /********** Start (Freelancer) -> New Post Added With Same Category of Freelancer **** */
+        /********** Start (Freelancer) -> New Post Added With Same Category of Freelancer **** */
                 admin.database().ref("Workers").once('value').then(element => {
                     var titleValue = "Justcall-UAE",
                         bodyValue = "You Have New Request ,You can Make offer \n" + "لديك طلب جديد ، يمكنك تقديم عرض الآن";
@@ -327,10 +327,59 @@ exports.sendNotification =
                     }
                     return;
                 }).catch(error => { console.log("adming worker" + error); });
-                /********** Start (Freelancer) -> New Post Added With Same Category of Freelancer **** */
+        /********** Start (Freelancer) -> New Post Added With Same Category of Freelancer **** */
 
-                /********** Start (Company) -> New Post Added With Same Category of Company **** */
-                /********** End (Company) -> New Post Added With Same Category of Company **** */
+        /********** Start (Company) -> New Post Added With Same Category of Company **** */
+                admin.database().ref("Company").once('value').then(element => {
+                    var titleValue = "Justcall-UAE",
+                        bodyValue = "You Have New Request ,You can Make offer \n" + "لديك طلب جديد ، يمكنك تقديم عرض الآن";
+                    element.forEach((childOfElement) => {
+                        var companyValue = childOfElement.val(),
+                            companyCategory;
+                        for(var companyCategoryCounter = 0; companyCategoryCounter < companyValue.companyCategoryId.length; companyCategoryCounter++ ){
+                            companyCategory = companyValue.companyCategoryId[companyCategoryCounter];
+                            if (companyCategory.localeCompare(categoryId) === 0) {
+                                var token = companyValue.messageToken;
+                                // badgeCount = companyValue.badge,
+                                // badgeNumber = parseInt(badgeCount) + 1,
+                                var value = "NotificationFreelancer/" + companyValue.companyId;
+                                admin.database().ref(value).push().set({
+                                    title: titleValue,
+                                    message: bodyValue,
+                                    shown: false,
+                                    orderId: snap.child("orderId").val()
+                                });
+                                if (token !== undefined) {
+                                    SendingDevices[counter] = token;
+                                    counter++;
+                                }
+                                break;
+                            }
+                        }
+                    });
+                    if (SendingDevices !== []) {
+                        var payload = {
+                            notification: {
+                                title: titleValue,
+                                body: bodyValue,
+                                sound: "default",
+                                // badge: badgeNumber + ""
+                            },
+                            data: {
+                                type: snap.child("orderId").val(),
+                                activity_key: "FREELANCER_POST_DETAILS"
+                            }
+                        };
+                        admin.messaging().sendToDevice(SendingDevices, payload)
+                            .then((response) => {
+                                return console.log("Successfully sending message:", response);
+                            }).catch((error) => {
+                                return console.log("Error sending message:", error);
+                            });
+                    }
+                    return;
+                }).catch(error => { console.log("adming worker" + error); });
+        /********** End (Company) -> New Post Added With Same Category of Company **** */
 
                 return;
             }).catch(error => { console.log(error); });
@@ -472,7 +521,7 @@ exports.sendNotification =
         /* *************************  End  State Change To Cancel ****************/
         return;
     });
-/*********** Start send notification Depend on Request state Changed ********/
+/*********** End send notification Depend on Request state Changed ********/
 
 /* ************* start notify customer WHEN Freelancer make offer to post belong to this customer ****************** */
 exports.sendNotificationToSpecificCustomer = functions.database.ref('Comments/{requestId}/{commentId}')
@@ -550,10 +599,18 @@ exports.sendNotificationToSpecificCustomer = functions.database.ref('Comments/{r
     });
 /* ************* End notify customer WHEN Freelancer make offer to post belong to this customer ****************** */
 
-/* ************* Start notify freelancer&Company WHEN customer accept offer belong to this Freelancer  ***************** */
+/* ************* Start notify freelancer & Company WHEN customer accept offer belong to this Freelancer  ***************** */
 exports.sendNotificationToFreeCompWhenCustomerAcceptOffer = functions.database.ref('FreeCustomerConnection/{connectionId}')
     .onCreate((snapshot, context) => {
-        admin.database().ref("Workers/" + snapshot.val().freelancerId).once('value').then(element => {
+        var refKeyWord = null,type = null;
+        if(snapshot.val().type === "COMPANY"){
+            refKeyWord = "Company/" + snapshot.val().freelancerId;
+            type = "COMPANY";
+        }else{
+            refKeyWord = "Workers/" + snapshot.val().freelancerId;
+            type = "FREELANCER";
+        }
+        admin.database().ref(refKeyWord).once('value').then(element => {
             const token = element.child("messageToken").val(),
                 titleValue = "Justcall-UAE",
                 bodyValue = "Customer Accepte Your Offer On Request " + snapshot.val().requestId +
@@ -588,6 +645,7 @@ exports.sendNotificationToFreeCompWhenCustomerAcceptOffer = functions.database.r
                             customerId: snapshot.val().customerId,
                             keyword: "Accept",
                             state: true,
+                            type : type,
                             time: new Date(),
                             orderId: snapshot.val().requestId
                         });
