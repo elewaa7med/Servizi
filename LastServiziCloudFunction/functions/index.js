@@ -558,16 +558,16 @@ exports.sendNotificationToSpecificCustomer = functions.database.ref('Comments/{r
                                 orderId: snap.child("orderId").val()
                             });
                             // admin.database().ref("Users/" + customerId).update({ badge: badgeNumber });
-                                admin.database().ref("CPNotification").push().set({
-                                    customerId: customerId,
-                                    freelancerId: snapshot.val().freelancerId,
-                                    Comment: snapshot.val().comment,
-                                    keyword: "Offer",
-                                    state: true,
-                                    type:type,
-                                    time: new Date(),
-                                    orderId: snap.child("orderId").val()
-                                });
+                            admin.database().ref("CPNotification").push().set({
+                                customerId: customerId,
+                                freelancerId: snapshot.val().freelancerId,
+                                Comment: snapshot.val().comment,
+                                keyword: "Offer",
+                                state: true,
+                                type: type,
+                                time: new Date(),
+                                orderId: snap.child("orderId").val()
+                            });
                             return console.log("suceessfully sending message:", response);
                         })
                         .catch((error) => {
@@ -588,7 +588,7 @@ exports.sendNotificationToSpecificCustomer = functions.database.ref('Comments/{r
                         Comment: snapshot.val().comment,
                         keyword: "Offer",
                         state: true,
-                        type:type,
+                        type: type,
                         time: new Date(),
                         orderId: snap.child("orderId").val()
                     });
@@ -691,9 +691,9 @@ exports.SendNotificaitonToFreeCompWehnCustomerRateWork = functions.database.ref(
         // }).catch(error => { });
         admin.database().ref("FreeCustomerConnection").once('value').then(snap => {
             var refKeyWord = null;
-            if(snap.val().type === "COMPANY"){
+            if (snap.val().type === "COMPANY") {
                 refKeyWord = "COMPANY/" + element.val().freelancerId
-            }else{
+            } else {
                 refKeyWord = "Workers/" + element.val().freelancerId;
             }
             snap.forEach(element => {
@@ -742,6 +742,164 @@ exports.SendNotificaitonToFreeCompWehnCustomerRateWork = functions.database.ref(
     });
 /* ************* End notify freelancer&Company WHEN customer Rate their Work  ***************** */
 
+/* ************* Start notify [Customer&freelancer&Company] WHEN change state to Active || Deactive ***************** */
+
+// Notify Customer When Active or Deactive it's Account 
+exports.SendNotificaitonToCustomerActDeact = functions.database.ref('Users/{userId}/activiationState')
+    .onUpdate((change, context) => {
+        admin.database().ref("Users/" + change.after.ref.parent.key).once('value').then(element => {
+            const token = element.child("messageToken").val(),
+                titleValue = "Justcall-UAE";
+             var bodyValue = "";
+            if (change.after.val() === false) {
+                bodyValue = "Your Account has been Deactivated . \n" + "لقد تم تعطيل حسابك .";
+            } else {
+                bodyValue = "Your Account has been Activated . \n" + "لقد تم تفعيل حسابك .";
+            }
+            // var badgeCount = element.child("badge").val(),
+            // badgeNumber = parseInt(badgeCount) + 1;
+            // console.log(badgeNumber);
+            if (token !== null) {
+                var payload = {
+                    notification: {
+                        title: titleValue,
+                        body: bodyValue,
+                        sound: "default",
+                        // badge: badgeNumber + ""
+                    },
+                    data: {
+                    }
+                };
+                admin.messaging().sendToDevice(token, payload)
+                    .then((response) => {
+                        var value = "NotificationFreelancer/" + element.val().userId;
+                        admin.database().ref(value).push().set({
+                            title: titleValue,
+                            message: bodyValue,
+                            shown: false
+                        });
+                        // admin.database().ref("Workers/" + snapshot.val().freelancerId).update({ badge: badgeNumber });
+                        return console.log("Successfully sending message:", response);
+                    })
+                    .catch((error) => {
+                        return console.log("Error sending message:", error);
+                    });
+            } else {
+                var value = "NotificationFreelancer/" + element.val().userId;
+                admin.database().ref(value).push().set({
+                    title: titleValue,
+                    message: bodyValue,
+                    shown: false
+                });
+            }
+            return;
+        }).catch(error => { });
+        return;
+    });
+// Notify freelancer When Active or Deactive it's Account 
+exports.SendNotificaitonToFreelancerActDeact = functions.database.ref('Workers/{workerId}/workerStatusActivation')
+    .onUpdate((change, context) => {
+        admin.database().ref("Workers/" + change.after.ref.parent.key).once('value').then(element => {
+            const token = element.child("messageToken").val(),
+                titleValue = "Justcall-UAE";
+                var bodyValue = "";
+            if (change.after.val() === false) {
+                bodyValue = "Your Account has been Deactivated . \n" + "لقد تم تعطيل حسابك .";
+            } else {
+                bodyValue = "Your Account has been Activated . \n" + "لقد تم تفعيل حسابك .";
+            }
+            // var badgeCount = element.child("badge").val(),
+            // badgeNumber = parseInt(badgeCount) + 1;
+            // console.log(badgeNumber);
+            if (token !== null) {
+                var payload = {
+                    notification: {
+                        title: titleValue,
+                        body: bodyValue,
+                        sound: "default",
+                        // badge: badgeNumber + ""
+                    },
+                    data: {
+                    }
+                };
+                admin.messaging().sendToDevice(token, payload)
+                    .then((response) => {
+                        var value = "NotificationFreelancer/" + element.val().workerId;
+                        admin.database().ref(value).push().set({
+                            title: titleValue,
+                            message: bodyValue,
+                            shown: false
+                        });
+                        // admin.database().ref("Workers/" + snapshot.val().freelancerId).update({ badge: badgeNumber });
+                        return console.log("Successfully sending message:", response);
+                    })
+                    .catch((error) => {
+                        return console.log("Error sending message:", error);
+                    });
+            } else {
+                var value = "NotificationFreelancer/" + element.val().workerId;
+                admin.database().ref(value).push().set({
+                    title: titleValue,
+                    message: bodyValue,
+                    shown: false
+                });
+            }
+            return;
+        }).catch(error => { });
+        return;
+    });
+// Notify Company When Active or Deactive it's Account 
+exports.SendNotificaitonToCompanyActDeact = functions.database.ref('Company/{CompanyId}/companyStatusActivation')
+    .onUpdate((change, context) => {
+        admin.database().ref("Company/" + change.after.ref.parent.key).once('value').then(element => {
+            const token = element.child("messageToken").val(),
+                titleValue = "Justcall-UAE";
+                var bodyValue = "";
+            if (change.after.val() === false) {
+                bodyValue = "Your Account has been Deactivated . \n" + "لقد تم تعطيل حسابك .";
+            } else {
+                bodyValue = "Your Account has been Activated . \n" + "لقد تم تفعيل حسابك .";
+            }
+            // var badgeCount = element.child("badge").val(),
+            // badgeNumber = parseInt(badgeCount) + 1;
+            // console.log(badgeNumber);
+            if (token !== null) {
+                var payload = {
+                    notification: {
+                        title: titleValue,
+                        body: bodyValue,
+                        sound: "default",
+                        // badge: badgeNumber + ""
+                    },
+                    data: {
+                    }
+                };
+                admin.messaging().sendToDevice(token, payload)
+                    .then((response) => {
+                        var value = "NotificationFreelancer/" + element.val().companyId;
+                        admin.database().ref(value).push().set({
+                            title: titleValue,
+                            message: bodyValue,
+                            shown: false
+                        });
+                        // admin.database().ref("Workers/" + snapshot.val().freelancerId).update({ badge: badgeNumber });
+                        return console.log("Successfully sending message:", response);
+                    })
+                    .catch((error) => {
+                        return console.log("Error sending message:", error);
+                    });
+            } else {
+                var value = "NotificationFreelancer/" + element.val().companyId;
+                admin.database().ref(value).push().set({
+                    title: titleValue,
+                    message: bodyValue,
+                    shown: false
+                });
+            }
+            return;
+        }).catch(error => { });
+});
+/* *************    End notify freelancer WHEN change state to Active || Deactive   ***************** */
 
 /********************************* 
 // notify Admin Mobile Application with -> 
