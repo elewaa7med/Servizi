@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 let admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
-/********** Start Welcome Messagese (Clients,Freelancer,Company) *********************************88 */
+/************** Start Welcome Messagese (Clients,Freelancer,Company) *********************************** */
 // Send Welcome Notification To Customer
 exports.welcomeNotificationCustomer = functions.database.ref('Users/{userId}')
     .onCreate((snapshot, context) => {
@@ -117,7 +117,7 @@ exports.welcomeNotificatioCompany = functions.database.ref('Company/{companyId}'
         }
         return;
     });
-/********** End Welcome Messagese (Clients,Freelancer,Company) *********************************88 */
+/************** End Welcome Messagese (Clients,Freelancer,Company) *********************************** */
 
 /********** Start Notify Customer CP Recive His Order ************/
 // notify customer that he's request is already sent to Control Panel
@@ -131,7 +131,6 @@ exports.confirmCPReciveRequest =
             // var badgeCount = element.child("badge").val(),
             // badgeNumber = parseInt(badgeCount) + 1;
             // console.log(badgeNumber);
-            console.log(token);
             var payload = {
                 notification: {
                     title: titleValue,
@@ -240,7 +239,7 @@ exports.sendNotificationWhenRequestStateChange =
                 const categoryId = snap.child("categoryId").val();
                 var SendingDevices = [],
                     counter = 0;
-        /********** Start (Customer) -> Now You Work With Freelancer **** */
+                /********** Start (Customer) -> Now You Work With Freelancer **** */
                 admin.database().ref("Users/" + customerId).once('value').then(element => {
                     const token = element.child("messageToken").val(),
                         titleValue = "Justcall-UAE",
@@ -278,9 +277,9 @@ exports.sendNotificationWhenRequestStateChange =
                         });
                     return;
                 }).catch(error => { });
-        /********** End (Customer) -> Now You Work With Freelancer **** */
+                /********** End (Customer) -> Now You Work With Freelancer **** */
 
-        /********** Start (Freelancer) -> New Post Added With Same Category of Freelancer **** */
+                /********** Start (Freelancer) -> New Post Added With Same Category of Freelancer **** */
                 admin.database().ref("Workers").once('value').then(element => {
                     var titleValue = "Justcall-UAE",
                         bodyValue = "You Have New Request ,You can Make offer \n" + "لديك طلب جديد ، يمكنك تقديم عرض الآن";
@@ -327,16 +326,16 @@ exports.sendNotificationWhenRequestStateChange =
                     }
                     return;
                 }).catch(error => { console.log("adming worker" + error); });
-        /********** Start (Freelancer) -> New Post Added With Same Category of Freelancer **** */
+                /********** Start (Freelancer) -> New Post Added With Same Category of Freelancer **** */
 
-        /********** Start (Company) -> New Post Added With Same Category of Company **** */
+                /********** Start (Company) -> New Post Added With Same Category of Company **** */
                 admin.database().ref("Company").once('value').then(element => {
                     var titleValue = "Justcall-UAE",
                         bodyValue = "You Have New Request ,You can Make offer \n" + "لديك طلب جديد ، يمكنك تقديم عرض الآن";
                     element.forEach((childOfElement) => {
                         var companyValue = childOfElement.val(),
                             companyCategory;
-                        for(var companyCategoryCounter = 0; companyCategoryCounter < companyValue.companyCategoryId.length; companyCategoryCounter++ ){
+                        for (var companyCategoryCounter = 0; companyCategoryCounter < companyValue.companyCategoryId.length; companyCategoryCounter++) {
                             companyCategory = companyValue.companyCategoryId[companyCategoryCounter];
                             if (companyCategory.localeCompare(categoryId) === 0) {
                                 var token = companyValue.messageToken;
@@ -379,7 +378,7 @@ exports.sendNotificationWhenRequestStateChange =
                     }
                     return;
                 }).catch(error => { console.log("adming worker" + error); });
-        /********** End (Company) -> New Post Added With Same Category of Company **** */
+                /********** End (Company) -> New Post Added With Same Category of Company **** */
 
                 return;
             }).catch(error => { console.log(error); });
@@ -523,14 +522,15 @@ exports.sendNotificationWhenRequestStateChange =
     });
 /*********** End send notification Depend on Request state Changed ********/
 
-/* ************* start notify customer WHEN Freelancer make offer to post belong to this customer ****************** */
+/************** start notify customer WHEN Freelancer & Company make offer to post belong to this customer ****************** */
 exports.sendNotificationToSpecificCustomer = functions.database.ref('Comments/{requestId}/{commentId}')
     .onCreate((snapshot, context) => {
+        var type = snapshot.val().type;
         admin.database().ref("Requests/" + snapshot.ref.parent.path.pieces_[1]).once('value').then(snap => {
             const customerId = snap.child("customerId").val(),
                 titleValue = "Justcall-UAE",
                 bodyValue = "New offer has been added to your Request of number " + snapshot.ref.parent.path.pieces_[1] +
-                    "\n إضافة عرض جديد لطلبك ، رقم" + snapshot.ref.parent.path.pieces_[1];
+                    "\n إضافة عرض جديد لطلبك رقم" + snapshot.ref.parent.path.pieces_[1];
             admin.database().ref("Users/" + customerId).once('value').then(element => {
                 const token = element.child("messageToken").val();
                 // var badgeCount = element.child("badge").val(),
@@ -558,15 +558,16 @@ exports.sendNotificationToSpecificCustomer = functions.database.ref('Comments/{r
                                 orderId: snap.child("orderId").val()
                             });
                             // admin.database().ref("Users/" + customerId).update({ badge: badgeNumber });
-                            admin.database().ref("CPNotification").push().set({
-                                customerId: customerId,
-                                freelancerId: snapshot.val().freelancerId,
-                                Comment: snapshot.val().comment,
-                                keyword: "Offer",
-                                state: true,
-                                time: new Date(),
-                                orderId: snap.child("orderId").val()
-                            });
+                                admin.database().ref("CPNotification").push().set({
+                                    customerId: customerId,
+                                    freelancerId: snapshot.val().freelancerId,
+                                    Comment: snapshot.val().comment,
+                                    keyword: "Offer",
+                                    state: true,
+                                    type:type,
+                                    time: new Date(),
+                                    orderId: snap.child("orderId").val()
+                                });
                             return console.log("suceessfully sending message:", response);
                         })
                         .catch((error) => {
@@ -587,6 +588,7 @@ exports.sendNotificationToSpecificCustomer = functions.database.ref('Comments/{r
                         Comment: snapshot.val().comment,
                         keyword: "Offer",
                         state: true,
+                        type:type,
                         time: new Date(),
                         orderId: snap.child("orderId").val()
                     });
@@ -597,16 +599,16 @@ exports.sendNotificationToSpecificCustomer = functions.database.ref('Comments/{r
         }).catch(error => { console.log(error) });
         return;
     });
-/* ************* End notify customer WHEN Freelancer make offer to post belong to this customer ****************** */
+/* ************* End notify customer WHEN Freelancer&Company make offer to post belong to this customer ****************** */
 
 /* ************* Start notify freelancer & Company WHEN customer accept offer belong to this Freelancer  ***************** */
 exports.sendNotificationToFreeCompWhenCustomerAcceptOffer = functions.database.ref('FreeCustomerConnection/{connectionId}')
     .onCreate((snapshot, context) => {
-        var refKeyWord = null,type = null;
-        if(snapshot.val().type === "COMPANY"){
+        var refKeyWord = null, type = null;
+        if (snapshot.val().type === "COMPANY") {
             refKeyWord = "Company/" + snapshot.val().freelancerId;
             type = "COMPANY";
-        }else{
+        } else {
             refKeyWord = "Workers/" + snapshot.val().freelancerId;
             type = "FREELANCER";
         }
@@ -645,7 +647,7 @@ exports.sendNotificationToFreeCompWhenCustomerAcceptOffer = functions.database.r
                             customerId: snapshot.val().customerId,
                             keyword: "Accept",
                             state: true,
-                            type : type,
+                            type: type,
                             time: new Date(),
                             orderId: snapshot.val().requestId
                         });
@@ -688,12 +690,18 @@ exports.SendNotificaitonToFreeCompWehnCustomerRateWork = functions.database.ref(
         //     numOfStars = element.val().numberOfStars;
         // }).catch(error => { });
         admin.database().ref("FreeCustomerConnection").once('value').then(snap => {
+            var refKeyWord = null;
+            if(snap.val().type === "COMPANY"){
+                refKeyWord = "COMPANY/" + element.val().freelancerId
+            }else{
+                refKeyWord = "Workers/" + element.val().freelancerId;
+            }
             snap.forEach(element => {
                 if (element.val().requestId === change.after.ref.parent.key) {
-                    admin.database().ref("Workers/" + element.val().freelancerId).once('value').then(workerSnap => {
+                    admin.database().ref(refKeyWord).once('value').then(workerSnap => {
                         const token = workerSnap.child("messageToken").val(),
                             titleValue = "Justcall-UAE",
-                            bodyValue = "Customer Rate Your Request" + "\n لقد قام العميل بتقيم عملك على طلبه";
+                            bodyValue = "Customer Rate Your work" + "\n لقد قام العميل بتقيم عملك على طلبه";
                         if (token !== undefined) {
                             var payload = {
                                 notification: {
