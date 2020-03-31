@@ -251,6 +251,18 @@
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
+                                                    <a class="nav-link" href="#Cworking" data-toggle="tab">Com
+                                                        Working
+                                                        <div class="ripple-container"></div>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#CFinish" data-toggle="tab">Com
+                                                        Finish
+                                                        <div class="ripple-container"></div>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
                                                     <a class="nav-link" href="#CMFinish" data-toggle="tab">CM Finish
                                                         <div class="ripple-container"></div>
                                                     </a>
@@ -266,6 +278,7 @@
                                 </div>
                                 <div class="card-body orders">
                                     <div class="tab-content">
+                                        <!------------- Start Pending Table Requested --------- -->
                                         <div class="tab-pane active" id="pending">
                                             <div class="nn">
                                                 <label>Search for order by phone </label>
@@ -306,6 +319,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!------------- End Pending Table Requested --------- -->
+
+                                        <!------------- Start POST Table Requested --------- -->
                                         <div class="tab-pane" id="post">
                                             <div class="nn">
                                                 <label>Search for order by phone </label>
@@ -346,6 +362,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!------------- End POST Table Requested --------- -->
+
+                                        <!------------- Start Freelancer working Table Requested --------- -->
                                         <div class="tab-pane" id="working">
                                             <div class="nn">
                                                 <label>Search for order by phone </label>
@@ -387,6 +406,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!------------- End Freelancer working Table Requested --------- -->
+
+                                        <!------------- Start Freelancer Finish Table Requested --------- -->
                                         <div class="tab-pane" id="FFinish">
                                             <div class="nn">
                                                 <label>Search for order by phone </label>
@@ -410,7 +432,7 @@
                                                     <tbody id="fFinishList">
                                                         <tr id="ffEmptyTable" style="display: none;">
                                                             <td colspan="8">
-                                                                No Order Has Been Requested Yet
+                                                                No Order Freelancers Finished Yet
                                                             </td>
                                                         </tr>
                                                         <tr id="spinnerLoadercw">
@@ -429,6 +451,98 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!------------- End Freelancer working Table Requested --------- -->
+
+                                        <!------------- Start Company working Table Requested --------- -->
+                                        <div class="tab-pane" id="Cworking">
+                                            <div class="nn">
+                                                <label>Search for order by phone </label>
+                                                <input type="text" id="cworkingPhone"
+                                                    onkeyup="searchInTable('CworkingList','cworkingPhone',6)"
+                                                    placeholder="Search with Phones ...">
+                                                <table id="comWorktb" class="table table-hover" style="overflow: auto">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Details</th>
+                                                            <th>location</th>
+                                                            <th>start Date</th>
+                                                            <th>Time</th>
+                                                            <th>Order No</th>
+                                                            <th>Paid</th>
+                                                            <th>Phone</th>
+                                                            <th>Operation</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="CworkingList">
+                                                        <tr id="CWEmptyTable" style="display: none;">
+                                                            <td colspan="8">
+                                                                No Order .. Company Working on Yet
+                                                            </td>
+                                                        </tr>
+                                                        <tr id="spinnerLoadercomw">
+                                                            <td colspan="8">
+                                                                <div class="spinner-border" role="status">
+                                                                    <span class="sr-only">Loading...</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="pagination-container">
+                                                    <nav>
+                                                        <ul class="pagination"></ul>
+                                                    </nav>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!------------- End Company working Table Requested --------- -->
+
+                                        <!------------- Start Company Finish Table Requested --------- -->
+                                        <div class="tab-pane" id="CFinish">
+                                            <div class="nn">
+                                                <label>Search for order by phone </label>
+                                                <input type="text" id="ComfinishPhone"
+                                                    onkeyup="searchInTable('CFinishList','ComfinishPhone',6)"
+                                                    placeholder="Search with Phones ...">
+                                                <table id="ComFinishtb" class="table table-hover"
+                                                    style="overflow: auto">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Details</th>
+                                                            <th>location</th>
+                                                            <th>start Date</th>
+                                                            <th>Time</th>
+                                                            <th>Order No</th>
+                                                            <th>Paid</th>
+                                                            <th>Phone</th>
+                                                            <th>Operation</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="CFinishList">
+                                                        <tr id="comfEmptyTable" style="display: none;">
+                                                            <td colspan="8">
+                                                                No Order Companies Finished Yet
+                                                            </td>
+                                                        </tr>
+                                                        <tr id="spinnerLoadercomf">
+                                                            <td colspan="8">
+                                                                <div class="spinner-border" role="status">
+                                                                    <span class="sr-only">Loading...</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="pagination-container">
+                                                    <nav>
+                                                        <ul class="pagination"></ul>
+                                                    </nav>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!------------- End Company Finish Table Requested --------- -->
+
+                                        <!------------- Start Our Company Finish Table Requested --------- -->
                                         <div class="tab-pane" id="CMFinish">
                                             <div class="nn">
                                                 <label>Search for order by phone </label>
@@ -471,6 +585,9 @@
                                             </div>
 
                                         </div>
+                                        <!------------- End Our Company Finish Table Requested --------- -->
+
+                                        <!------------- Start Cancel Table Requested --------- -->
                                         <div class="tab-pane" id="Cancel">
                                             <div class="nn">
                                                 <label>Search for order by phone </label>
@@ -511,6 +628,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!------------- End Cancel Table Requested --------- -->
+
                                     </div>
                                 </div>
                             </div>

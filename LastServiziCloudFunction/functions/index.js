@@ -394,7 +394,7 @@ exports.sendNotificationWhenRequestStateChange =
             admin.database().ref(change.after.ref.parent.path).once('value').then(snap => {
                 const customerId = snap.child("customerId").val(),
                     titleValue = "Justcall-UAE",
-                    bodyValue = "Freelancer finish Job , Job Has Been Finished Successfully. \n" + ".العامل المستقل انهى العمل ، تم الانتهاء من العمل بنجاح.";
+                    bodyValue = "Job Has Been Finished Successfully. \n" + ".العامل المستقل انهى العمل ، تم الانتهاء من العمل بنجاح.";
                 admin.database().ref("Users/" + customerId).once('value').then(element => {
                     const token = element.child("messageToken").val();
                     console.log(token);
@@ -743,7 +743,6 @@ exports.SendNotificaitonToFreeCompWehnCustomerRateWork = functions.database.ref(
 /* ************* End notify freelancer&Company WHEN customer Rate their Work  ***************** */
 
 /* ************* Start notify [Customer&freelancer&Company] WHEN change state to Active || Deactive ***************** */
-
 // Notify Customer When Active or Deactive it's Account 
 exports.SendNotificaitonToCustomerActDeact = functions.database.ref('Users/{userId}/activiationState')
     .onUpdate((change, context) => {

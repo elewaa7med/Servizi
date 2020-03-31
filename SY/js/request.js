@@ -28,6 +28,8 @@ function readless(event, result) {
 (function Read() {
     const freeFinsih = document.getElementById("fFinishList"),
         freeWorking = document.getElementById("workingList"),
+        companyFinsih = document.getElementById("CFinishList"),
+        companyWorking = document.getElementById("CworkingList"),
         listcmfinish = document.getElementById("listcmfinish"),
         post = document.getElementById("listpost"),
         userListUI = document.getElementById("user-list"),
@@ -36,6 +38,8 @@ function readless(event, result) {
         postCounter = 0,
         freeWorkingCounter = 0,
         freeFinishCounter = 0,
+        companyWorkingCounter = 0,
+        companyFinishCounter = 0,
         cmFinishCounter = 0,
         cancelCounter = 0,
         newChildAdded = false;
@@ -47,12 +51,16 @@ function readless(event, result) {
         $("#spinnerLoadercw").hide();
         $("#spinnerLoadercf").hide();
         $("#spinnerLoaderc").hide();
+        $("#spinnerLoadercomw").hide();
+        $("#spinnerLoadercomf").hide();
         $('#post .pagination').empty();
 
         difPagination("#posttb", "Post", "#post");
         difPagination("#freeFinishtb", "fFinish", "#FFinish");
         difPagination("#freeWorktb", "FWorking", "#working");
         difPagination("#cmFinishtb", "CFinish", "#CMFinish");
+        difPagination("#comWorktb", "comWorking", "#Cworking");
+        difPagination("#ComFinishtb", "CFinish", "#comFinish");
         difPagination("#pendtb", "Pending", "#Pending");
         difPagination("#canceltb", "Cancel", "#Cancel");
 
@@ -68,6 +76,12 @@ function readless(event, result) {
         if (freeFinishCounter == 0) {
             $("#ffEmptyTable").show();
         }
+        if (companyWorkingCounter == 0) {
+            $("#CWEmptyTable").show();
+        }
+        if (companyFinishCounter == 0) {
+            $("#comfEmptyTable").show();
+        }
         if (cmFinishCounter == 0) {
             $("#cfEmptyTable").show();
         }
@@ -79,6 +93,7 @@ function readless(event, result) {
 
     requestRef.on("child_added", snap => {
         var keyword = snap.val().state,
+            type = snap.val().type,
             $li = document.createElement("tr"),
             descriptionCol = document.createElement("td"),
             locationCol = document.createElement("td"),
@@ -102,10 +117,18 @@ function readless(event, result) {
             postCounter++;
         }
         if (keyword == "FREELANCER_WORKING") {
-            freeWorkingCounter++;
+            if (type == "COMPANY") {
+                companyWorkingCounter++;
+            } else {
+                freeWorkingCounter++;
+            }
         }
         if (keyword == "FREELANCE_FINISHED") {
-            freeFinishCounter++;
+            if (type == "COMPANY") {
+                companyFinishCounter++;
+            } else {
+                freeFinishCounter++;
+            }
         }
         if (keyword == "CM_FINISHED") {
             cmFinishCounter++;
@@ -235,22 +258,42 @@ function readless(event, result) {
         }
 
         if (keyword === "FREELANCE_FINISHED") {
-            $li.classList.add("fFinish");
-            $("#ffEmptyTable").hide();
-            freeFinsih.prepend($li);
-            if (newChildAdded == true) {
-                $('#FFinish .pagination').empty();
-                difPagination("#freeFinishtb", "fFinish", "#FFinish");
+            if (type == "COMPANY") {
+                $li.classList.add("comFinish");
+                $("#comfEmptyTable").hide();
+                companyFinsih.prepend($li);
+                if (newChildAdded == true) {
+                    $('#CFinish .pagination').empty();
+                    difPagination("#ComFinishtb", "CFinish", "#comFinish");
+                }
+            } else {
+                $li.classList.add("fFinish");
+                $("#ffEmptyTable").hide();
+                freeFinsih.prepend($li);
+                if (newChildAdded == true) {
+                    $('#FFinish .pagination').empty();
+                    difPagination("#freeFinishtb", "fFinish", "#FFinish");
+                }
             }
         }
 
         if (keyword === "FREELANCER_WORKING") {
-            $li.classList.add("FWorking");
-            $("#fwEmptyTable").hide();
-            freeWorking.prepend($li);
-            if (newChildAdded == true) {
-                $('#working .pagination').empty();
-                difPagination("#freeWorktb", "FWorking", "#working");
+            if (type === "COMPANY") {
+                $li.classList.add("comWorking");
+                $("#CWEmptyTable").hide();
+                companyWorking.prepend($li);
+                if (newChildAdded == true) {
+                    $('#Cworking .pagination').empty();
+                    difPagination("#comWorktb", "comWorking", "#Cworking");
+                }
+            } else {
+                $li.classList.add("FWorking");
+                $("#fwEmptyTable").hide();
+                freeWorking.prepend($li);
+                if (newChildAdded == true) {
+                    $('#working .pagination').empty();
+                    difPagination("#freeWorktb", "FWorking", "#working");
+                }
             }
         }
         if (keyword === "CM_FINISHED") {
@@ -365,19 +408,42 @@ function readless(event, result) {
                 }
             }
             if (keyword === "FREELANCE_FINISHED") {
-                $li.classList.add("fFinish");
-                freeFinsih.prepend($li);
-                if (newChildAdded == true) {
-                    $('#FFinish .pagination').empty();
-                    difPagination("#freeFinishtb", "fFinish", "#FFinish");
+                if (type == "COMPANY") {
+                    $li.classList.add("comFinish");
+                    $("#comfEmptyTable").hide();
+                    companyFinsih.prepend($li);
+                    if (newChildAdded == true) {
+                        $('#CFinish .pagination').empty();
+                        difPagination("#ComFinishtb", "CFinish", "#comFinish");
+                    }
+                } else {
+                    $li.classList.add("fFinish");
+                    $("#ffEmptyTable").hide();
+                    freeFinsih.prepend($li);
+                    if (newChildAdded == true) {
+                        $('#FFinish .pagination').empty();
+                        difPagination("#freeFinishtb", "fFinish", "#FFinish");
+                    }
                 }
             }
+    
             if (keyword === "FREELANCER_WORKING") {
-                $li.classList.add("FWorking");
-                freeWorking.prepend($li);
-                if (newChildAdded == true) {
-                    $('#working .pagination').empty();
-                    difPagination("#freeWorktb", "FWorking", "#working");
+                if (type === "COMPANY") {
+                    $li.classList.add("comWorking");
+                    $("#CWEmptyTable").hide();
+                    companyWorking.prepend($li);
+                    if (newChildAdded == true) {
+                        $('#Cworking .pagination').empty();
+                        difPagination("#comWorktb", "comWorking", "#Cworking");
+                    }
+                } else {
+                    $li.classList.add("FWorking");
+                    $("#fwEmptyTable").hide();
+                    freeWorking.prepend($li);
+                    if (newChildAdded == true) {
+                        $('#working .pagination').empty();
+                        difPagination("#freeWorktb", "FWorking", "#working");
+                    }
                 }
             }
             if (keyword === "CM_FINISHED") {
@@ -399,9 +465,6 @@ function readless(event, result) {
         }
     });
 })();
-
-
-
 /************************************* End Company Maintaince Finish **********************************************/
 
 
@@ -451,10 +514,10 @@ function excuteNotification(title, body, token) {
             }),
             success: function (respone) {
                 var postData = {
-                   message: body.value,
-                   shown: false,
-                   orderId: "",
-                   title: title.value,
+                    message: body.value,
+                    shown: false,
+                    orderId: "",
+                    title: title.value,
 
                 };
                 saveNotification("NotificationCustomer", postData);
@@ -497,7 +560,6 @@ function saveNotification(notTable, postData) {
     );
 }
 /************************** End save Notification ******************************/
-
 /************************************* End Send Notification ************************************************/
 
 

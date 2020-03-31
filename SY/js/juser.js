@@ -121,7 +121,7 @@ if (localStorage.getItem("currentPage") == "company") {
     });
 
 })();
-/********************** Start Read **Employee** Data from Firebase Database And Change Happen To Table Data *******************/
+/********************** End Read **Employee** Data from Firebase Database And Change Happen To Table Data *******************/
 
 /********************** Start Read **Customer** Data from Firebase Database And Change Happen To Table Data *******************/
 (function () {
@@ -586,6 +586,7 @@ function editCom() {
         "companyNameInEnglish": comName.value,
         "companyPhone": comPh.value,
         "companyPhoto": imgCom.src,
+        "companyAttachment": imgattachcom.getAttribute("value"),
         "companyCategoryId": comCat.getAttribute("catid").split(" , ")
     }).then(function () {
         ComsRef.child("companyLocation").update({
@@ -1477,6 +1478,11 @@ $('#editCompany').on('show.bs.modal', function (event) {
         } else {
             imgCom.src = snapChild.val().companyPhoto;
         }
+        if (!snapChild.val().companyAttachment) {
+            imgattachcom.setAttribute("value","");
+        } else {
+            imgattachcom.setAttribute("value",snapChild.val().companyAttachment);
+        }
     });
 });
 $('#editCompany').on('hide.bs.modal', function (event) {
@@ -1605,6 +1611,22 @@ fileButtonfr.addEventListener('change', function (e) {
     //var gg = firebase.storage().ref('img/' + file.name).fullPath();
 });
 
+var AttachButtonCom = document.getElementById('File2Attach');
+var imgattachcom = document.getElementById('imgattachcom');
+AttachButtonCom.addEventListener('change', function (e) {
+    $("#editCompany  #spinner-border-edit").show();
+    $("#editecomp").attr("disabled", "disabled");
+    var file = e.target.files[0];
+    var storageRef = firebase.storage().ref('img/' + file.name);
+    var task = storageRef.put(file).then((snapshot) => {
+        // added this part which as grabbed the download url from the pushed snapshot
+        var jj = snapshot.downloadURL;
+        imgattachcom.setAttribute("value",jj);
+        $("#editCompany  #spinner-border-edit").hide();
+        $("#editecomp").removeAttr("disabled");
+    });
+});
+
 var fileButtonCom = document.getElementById('File1Com');
 var imgCom = document.getElementById('imgCom');
 fileButtonfr.addEventListener('change', function (e) {
@@ -1628,7 +1650,10 @@ function imageBrowserFreelancer() {
     var imageBrowserFreelancer = document.getElementById("File1fr");
     imageBrowserFreelancer.click();
 }
-
+function imageBrowserCompanyAttachment() {
+    var imageBrowserCompanyAttachment = document.getElementById("File2Attach");
+    imageBrowserCompanyAttachment.click();
+}
 
 // function deleteCustomer(e) {
 //     var customerId = e.target.getAttribute("customerid");

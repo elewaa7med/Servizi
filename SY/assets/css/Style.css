@@ -436,7 +436,8 @@ thead tr th:last-child {
 }
 
 #editFreelancer button[onclick="imageBrowserFreelancer()"],
-#editCompany button[onclick="imageBrowserFreelancer()"] {
+#editCompany button[onclick="imageBrowserFreelancer()"],
+#editCompany button[onclick="imageBrowserCompanyAttachment()"] {
     width: 100%;
     padding: 0px;
     text-align: center;
@@ -598,8 +599,12 @@ tbody {
 
 #working table thead tr th:nth-child(1), 
 #working table tbody tr td:nth-child(1), 
+#Cworking table thead tr th:nth-child(1), 
+#Cworking table tbody tr td:nth-child(1), 
 #FFinish table thead tr th:nth-child(1), 
-#FFinish table tbody tr td:nth-child(1), 
+#FFinish table tbody tr td:nth-child(1),
+#CFinish table thead tr th:nth-child(1), 
+#CFinish table tbody tr td:nth-child(1),  
 #CMFinish table thead tr th:nth-child(1),  
 #CMFinish table tbody tr td:nth-child(1) {
     width: 28%;
@@ -617,8 +622,12 @@ tbody {
 
 #working table thead tr th:nth-child(2), 
 #working table tbody tr td:nth-child(2), 
+#Cworking table thead tr th:nth-child(2), 
+#Cworking table tbody tr td:nth-child(2), 
 #FFinish table thead tr th:nth-child(2), 
 #FFinish table tbody tr td:nth-child(2), 
+#CFinish table thead tr th:nth-child(2), 
+#CFinish table tbody tr td:nth-child(2), 
 #CMFinish table thead tr th:nth-child(2), 
 #CMFinish table tbody tr td:nth-child(2) {
     width: 15%;
@@ -637,6 +646,8 @@ tbody {
 
 #working table thead tr th:nth-child(3), 
 #working table tbody tr td:nth-child(3), 
+#Cworking table thead tr th:nth-child(3), 
+#Cworking table tbody tr td:nth-child(3), 
 #FFinish table thead tr th:nth-child(3), 
 #FFinish table tbody tr td:nth-child(3), 
 #CMFinish table thead tr th:nth-child(3), 
@@ -657,8 +668,12 @@ tbody {
 
 #working table thead tr th:nth-child(4), 
 #working table tbody tr td:nth-child(4), 
+#Cworking table thead tr th:nth-child(4), 
+#Cworking table tbody tr td:nth-child(4), 
 #FFinish table thead tr th:nth-child(4), 
-#FFinish table tbody tr td:nth-child(4), 
+#FFinish table tbody tr td:nth-child(4),
+#CFinish table thead tr th:nth-child(4), 
+#CFinish table tbody tr td:nth-child(4), 
 #CMFinish table thead tr th:nth-child(4), 
 #CMFinish table tbody tr td:nth-child(4) {
     width: 7%;
@@ -677,8 +692,12 @@ tbody {
 
 #working table thead tr th:nth-child(5), 
 #working table tbody tr td:nth-child(5), 
+#Cworking table thead tr th:nth-child(5), 
+#Cworking table tbody tr td:nth-child(5), 
 #FFinish table thead tr th:nth-child(5), 
-#FFinish table tbody tr td:nth-child(5), 
+#FFinish table tbody tr td:nth-child(5),
+#CFinish table thead tr th:nth-child(5), 
+#CFinish table tbody tr td:nth-child(5), 
 #CMFinish table thead tr th:nth-child(5), 
 #CMFinish table tbody tr td:nth-child(5) {
     width: 15%;
@@ -697,8 +716,12 @@ tbody {
 
 #working table thead tr th:nth-child(6), 
 #working table tbody tr td:nth-child(6), 
+#Cworking table thead tr th:nth-child(6), 
+#Cworking table tbody tr td:nth-child(6),
 #FFinish table thead tr th:nth-child(6), 
 #FFinish table tbody tr td:nth-child(6), 
+#CFinish table thead tr th:nth-child(6), 
+#CFinish table tbody tr td:nth-child(6), 
 #CMFinish table thead tr th:nth-child(6), 
 #CMFinish table tbody tr td:nth-child(6) {
     width: 10%;
@@ -718,8 +741,10 @@ tbody {
 #pending table tbody tr td:nth-child(7) button, 
 #post table tbody tr td:nth-child(7) button, 
 #Cancel table tbody tr td:nth-child(7) button, 
-#working table tbody tr td:nth-child(8) button, 
+#working table tbody tr td:nth-child(8) button,
+#Cworking table tbody tr td:nth-child(8) button, 
 #FFinish table tbody tr td:nth-child(8) button, 
+#CFinish table tbody tr td:nth-child(8) button, 
 #CMFinish table tbody tr td:nth-child(8) button {
     padding: 0px;
     width: 90px;
@@ -728,8 +753,12 @@ tbody {
 
 #working table thead tr th:nth-child(7), 
 #working table tbody tr td:nth-child(7), 
+#Cworking table thead tr th:nth-child(7), 
+#Cworking table tbody tr td:nth-child(7), 
 #FFinish table thead tr th:nth-child(7), 
-#FFinish table tbody tr td:nth-child(7), 
+#FFinish table tbody tr td:nth-child(7),
+#CFinish table thead tr th:nth-child(7), 
+#CFinish table tbody tr td:nth-child(7), 
 #CMFinish table thead tr th:nth-child(7), 
 #CMFinish table tbody tr td:nth-child(7) {
     width: 11%;
@@ -738,8 +767,12 @@ tbody {
 
 #working table thead tr th:nth-child(8), 
 #working table tbody tr td:nth-child(8), 
+#Cworking table thead tr th:nth-child(8), 
+#Cworking table tbody tr td:nth-child(8), 
 #FFinish table thead tr th:nth-child(8), 
-#FFinish table tbody tr td:nth-child(8), 
+#FFinish table tbody tr td:nth-child(8),
+#CFinish table thead tr th:nth-child(8), 
+#CFinish table tbody tr td:nth-child(8), 
 #CMFinish table thead tr th:nth-child(8), 
 #CMFinish table tbody tr td:nth-child(8) {
     width: 7%;
@@ -753,8 +786,10 @@ tbody {
 #spinnerLoaderPend, 
 #spinnerLoaderPost, 
 #spinnerLoaderfw, 
+#spinnerLoadercomw, 
 #spinnerLoadercw, 
-#spinnerLoadercf, 
+#spinnerLoadercf,
+#spinnerLoadercomf,
 #spinnerLoaderc, 
 #spinnerLoadercountry, 
 #pendEmptyTable, 
@@ -762,7 +797,9 @@ tbody {
 #cEmptyTable, 
 #cfEmptyTable, 
 #ffEmptyTable, 
+#comfEmptyTable, 
 #fwEmptyTable,
+#CWEmptyTable,
 #countryEmptyTable {
     text-align: center;
 }
@@ -1159,8 +1196,12 @@ div#divtb input, .nn input, div#divContainer input {
     #CMFinish table tbody tr td:nth-child(6), 
     #FFinish table thead tr th:nth-child(6), 
     #FFinish table tbody tr td:nth-child(6), 
+    #CFinish table thead tr th:nth-child(6), 
+    #CFinish table tbody tr td:nth-child(6), 
     #working table thead tr th:nth-child(6), 
     #working table tbody tr td:nth-child(6),
+    #Cworking table thead tr th:nth-child(6), 
+    #Cworking table tbody tr td:nth-child(6),
     #country #countrytb tbody tr td:nth-child(3) button:nth-child(3),
     #country #countrytb tbody tr td:nth-child(3) button:nth-child(4),
     #city #citytb tbody tr td:nth-child(3) button:nth-child(3),

@@ -39,7 +39,7 @@ if (userType != "Admin") {
 }
 
 /*********************************** Start ReadNotification() **********************************/
-(function() {
+(function () {
     var spanNotiNumber = document.getElementById("noti-number");
     var notifyList = document.getElementById("notifList");
     var firstTime = false;
@@ -94,7 +94,7 @@ if (userType != "Admin") {
             }
         }
         /************************** End <a id="snapshot.key" className="dropdown-item" onmouseover="function()" onclick="function()"></a> to append notification in it *****************************/
-        var ids, userPhone, workerPhone,companyPhone;
+        var ids, userPhone, workerPhone, companyPhone;
         snapshot.forEach(function (element) {
 
             var requestKey = element.key,
@@ -143,16 +143,27 @@ if (userType != "Admin") {
                 }
 
                 if (requestValue == "Offer") {
-                    cmRef.child(snapshot.val().freelancerId).once("value").then(function (workerSnapshot) {
-                        if (workerSnapshot.hasChild("workerPhone")) {
-                            workerPhone = workerSnapshot.child("workerPhone").val();
-                        }
-                        notifyLink.setAttribute("secondaryId", snapshot.val().orderId);
-                        notifyLink.setAttribute("keyword", "Offer");
-                        notifyLink.innerHTML = "New Offer add by Freelancer  &nbsp;<b>" + workerPhone + "</b> &nbsp; with coast = " + snapshot.val().Comment + " To Request " + snapshot.val().orderId;
-                        notifyLink.name = "/Pages/orderDetails.html";
-                    });
-
+                    if (element.val().type == "COMPANY") {
+                        comRef.child(snapshot.val().freelancerId).once("value").then(function (CompanySnapshot) {
+                            if (CompanySnapshot.hasChild("companyPhone")) {
+                                workerPhone = CompanySnapshot.child("companyPhone").val();
+                            }
+                            notifyLink.setAttribute("secondaryId", snapshot.val().orderId);
+                            notifyLink.setAttribute("keyword", "Offer");
+                            notifyLink.innerHTML = "New Offer add by Company  &nbsp;<b>" + workerPhone + "</b> &nbsp; with coast = " + snapshot.val().Comment + " To Request " + snapshot.val().orderId;
+                            notifyLink.name = "/Pages/orderDetails.html";
+                        });
+                    } else {
+                        cmRef.child(snapshot.val().freelancerId).once("value").then(function (workerSnapshot) {
+                            if (workerSnapshot.hasChild("workerPhone")) {
+                                workerPhone = workerSnapshot.child("workerPhone").val();
+                            }
+                            notifyLink.setAttribute("secondaryId", snapshot.val().orderId);
+                            notifyLink.setAttribute("keyword", "Offer");
+                            notifyLink.innerHTML = "New Offer add by Freelancer  &nbsp;<b>" + workerPhone + "</b> &nbsp; with coast = " + snapshot.val().Comment + " To Request " + snapshot.val().orderId;
+                            notifyLink.name = "/Pages/orderDetails.html";
+                        });
+                    }
                 }
 
                 if (requestValue == "Accept") {
@@ -160,12 +171,21 @@ if (userType != "Admin") {
                         if (customerSnapshot.hasChild("userPhoneNumber")) {
                             userPhone = customerSnapshot.child("userPhoneNumber").val();
                             notifyLink.innerHTML = "Customer  &nbsp;<b>" + userPhone + "</b> &nbsp;";
-                            cmRef.child(snapshot.val().freelancerId).once("value").then(function (workerSnapshot) {
-                                if (workerSnapshot.hasChild("workerPhone")) {
-                                    workerPhone = workerSnapshot.child("workerPhone").val();
-                                    notifyLink.innerHTML += "Accept freelancer &nbsp;<b> " + workerPhone + "</b> &nbsp; on Request " + snapshot.val().orderId;
-                                }
-                            });
+                            if (element.val().type == "COMPANY") {
+                                comRef.child(snapshot.val().freelancerId).once("value").then(function (companySnapshot) {
+                                    if (companySnapshot.hasChild("companyPhone")) {
+                                        workerPhone = companySnapshot.child("companyPhone").val();
+                                        notifyLink.innerHTML += "Accept company &nbsp;<b> " + workerPhone + "</b> &nbsp; on Request " + snapshot.val().orderId;
+                                    }
+                                });
+                            } else {
+                                cmRef.child(snapshot.val().freelancerId).once("value").then(function (workerSnapshot) {
+                                    if (workerSnapshot.hasChild("workerPhone")) {
+                                        workerPhone = workerSnapshot.child("workerPhone").val();
+                                        notifyLink.innerHTML += "Accept freelancer &nbsp;<b> " + workerPhone + "</b> &nbsp; on Request " + snapshot.val().orderId;
+                                    }
+                                });
+                            }
                         }
                     });
                     notifyLink.setAttribute("secondaryId", snapshot.val().orderId);
@@ -220,6 +240,14 @@ if (userName === null || userName === undefined || userName === "" &&
 }
 /*................................. End logout If no User .....................................*/
 
+/******************* start Current user Name & privilege display  **********/
+(function(){
+    console.log(localStorage.getItem("userName"))
+    console.log(localStorage.getItem("userType"))
+    $("#lblname").text(localStorage.getItem("userName"));
+    $("#lblore").text(localStorage.getItem("userType"));
+}());
+/*............. End Current user Name & privilege display  ................*/
 
 /********************************** Start Save Employee History Action *************************/
 function saveHistory(actionName = null, requestId = null, freelancerId = null, title = null, body = null, toWho = null, toWhotype = null, toWhoCategory = null) {
@@ -289,6 +317,12 @@ function searchInTable(value, id, tablerow) {
                 if (table.parentElement.id == "freeFinishtb") {
                     tr[i].classList.add("fFinish");
                 }
+                if (table.parentElement.id == "comWorktb") {
+                    tr[i].classList.add("comWorking");
+                }
+                if (table.parentElement.id == "ComFinishtb") {
+                    tr[i].classList.add("CFinish");
+                }
                 if (table.parentElement.id == "cmFinishtb") {
                     tr[i].classList.add("CFinish");
                 }
@@ -308,6 +342,12 @@ function searchInTable(value, id, tablerow) {
                 }
                 if (table.parentElement.id == "freeFinishtb") {
                     tr[i].classList.remove("fFinish");
+                }
+                if (table.parentElement.id == "comWorktb") {
+                    tr[i].classList.remove("comWorking");
+                }
+                if (table.parentElement.id == "ComFinishtb") {
+                    tr[i].classList.remove("CFinish");
                 }
                 if (table.parentElement.id == "cmFinishtb") {
                     tr[i].classList.remove("CFinish");
