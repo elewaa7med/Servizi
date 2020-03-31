@@ -60,7 +60,7 @@ function readless(event, result) {
         difPagination("#freeWorktb", "FWorking", "#working");
         difPagination("#cmFinishtb", "CFinish", "#CMFinish");
         difPagination("#comWorktb", "comWorking", "#Cworking");
-        difPagination("#ComFinishtb", "CFinish", "#comFinish");
+        difPagination("#ComFinishtb", "comFinish", "#CFinish");
         difPagination("#pendtb", "Pending", "#Pending");
         difPagination("#canceltb", "Cancel", "#Cancel");
 
@@ -264,7 +264,7 @@ function readless(event, result) {
                 companyFinsih.prepend($li);
                 if (newChildAdded == true) {
                     $('#CFinish .pagination').empty();
-                    difPagination("#ComFinishtb", "CFinish", "#comFinish");
+                    difPagination("#ComFinishtb", "comFinish", "#CFinish");
                 }
             } else {
                 $li.classList.add("fFinish");

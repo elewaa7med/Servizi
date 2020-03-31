@@ -321,7 +321,7 @@ function searchInTable(value, id, tablerow) {
                     tr[i].classList.add("comWorking");
                 }
                 if (table.parentElement.id == "ComFinishtb") {
-                    tr[i].classList.add("CFinish");
+                    tr[i].classList.add("comFinish");
                 }
                 if (table.parentElement.id == "cmFinishtb") {
                     tr[i].classList.add("CFinish");
@@ -347,7 +347,7 @@ function searchInTable(value, id, tablerow) {
                     tr[i].classList.remove("comWorking");
                 }
                 if (table.parentElement.id == "ComFinishtb") {
-                    tr[i].classList.remove("CFinish");
+                    tr[i].classList.remove("comFinish");
                 }
                 if (table.parentElement.id == "cmFinishtb") {
                     tr[i].classList.remove("CFinish");
@@ -402,6 +402,29 @@ function searchInTable(value, id, tablerow) {
             }
             $('#FFinish .pagination').empty();
             difPagination("#freeFinishtb", "fFinish", "#FFinish");
+
+        }
+        if (table.parentElement.id == "comWorktb") {
+            if ($(value + " tr[class*='comWorking']").length === 0) {
+                $(value + " #CWEmptyTable").removeAttr("style");
+                $(value + " #CWEmptyTable td").removeAttr("style");
+            } else {
+                $("#CWEmptyTable").attr("style", "display: none;");
+                $("#CWEmptyTable td").attr("style", "display: none;");
+            }
+            $('#Cworking .pagination').empty();
+            difPagination("#comWorktb", "comWorking", "#Cworking");
+        }
+        if (table.parentElement.id == "ComFinishtb") {
+            if ($(value + " tr[class*='comFinish']").length === 0) {
+                $(value + " #comfEmptyTable").removeAttr("style");
+                $(value + " #comfEmptyTable td").removeAttr("style");
+            } else {
+                $("#comfEmptyTable").attr("style", "display: none;");
+                $("#comfEmptyTable td").attr("style", "display: none;");
+            }
+            $('#CFinish .pagination').empty();
+            difPagination("#ComFinishtb", "comFinish", "#CFinish");
 
         }
         if (table.parentElement.id == "cmFinishtb") {
@@ -507,6 +530,12 @@ function difPagination(tableID, className, mainId) {
             $(mainId + ' .pagination').append('<li data-page="' + i + '">\<span>' + i++ + '<span class="sr-only">(current)</span>\</li>').show();
         }
         for (var i = 1; i <= pagenu && table == "#freeFinishtb";) {
+            $(mainId + ' .pagination').append('<li data-page="' + i + '">\<span>' + i++ + '<span class="sr-only">(current)</span>\</li>').show();
+        }
+        for (var i = 1; i <= pagenu && table == "#comWorktb";) {
+            $(mainId + ' .pagination').append('<li data-page="' + i + '">\<span>' + i++ + '<span class="sr-only">(current)</span>\</li>').show();
+        }
+        for (var i = 1; i <= pagenu && table == "#ComFinishtb";) {
             $(mainId + ' .pagination').append('<li data-page="' + i + '">\<span>' + i++ + '<span class="sr-only">(current)</span>\</li>').show();
         }
         for (var i = 1; i <= pagenu && table == "#posttb";) {
